@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  <title>instructions.html</title>
+</head>
+<body>
+<h2 >How to install Eclipse</h2>
+<div class="section">
+    <h2 id="installing-java">Step 0: Installing Java</h2>
+
+    <p>Before you start installing Eclipse, make sure that you have the Java Development
+    Kit (the JDK) installed on your system. If you're not sure, it's safe to just try
+    installing it again. (If you already have the JDK installed, installing it again will
+    just update you to a slightly newer version.)</p>
+
+    <p>To download the JDK, go to <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank">this page</a> and download the appropriate file for your
+    operating system.</a>
+
+    <p>Note: while the latest version of Java is Java 9, we strongly recommend you use
+    Java 8 in this class. While our course projects in theory work with Java 9, they have
+    only been tested with Java 8. The link above will take you to the Java 8 download page.</p>
+</div>
+
+<div class="section">
+    <h2 id="installation-guide">Step 1: Installing and configuring Eclipse</h2>
+
+    <h3>Step 1a: Download</h3>
+
+    <p><strong>NOTE:</strong> if you used Eclipse before, you may have an
+    older version installed. If so, we strongly recommend you uninstall it
+    and install the latest version for maximum compatibility.</p>
+
+    <p>You can download Eclipse at <a href="https://www.eclipse.org/downloads" target="_blank">eclipse.org/downloads</a>. The latest version, as of time of writing, is Eclipse SimRel.</p>
+
+    <h3>Step 1b: Installation</h3>
+
+    <ol>
+        <li><p>Run the Eclipse installer. You should see a window like the one below;
+            Select the first "Eclipse IDE for Java Developers" option.</p>
+
+            <p><img src="eclipse-ide-choice.png" /></p>
+        </li>
+        <li><p>After that point, you can keep hitting "yes" and select all the default
+            options (unless you want to change something).</p>
+
+            <p>You should eventually see a screen like this. Click the "Launch" button.</p>
+
+            <p><img src="eclipse-install-done.png" /></p>
+
+
+        </li>
+    </ol>
+
+    <h3>Step 1c: Configuration</h3>
+
+    <ol>
+        <li><p>When you run Eclipse, it'll ask you where you want your <em>workspace</em>
+            to be (see screenshot below for example). Your workspace will be the location
+            where Eclipse will add any new projects you create. You can change the location
+            of the workspace if you want: just make sure you remember what you picked.</p>
+
+            <p><img src="eclipse-workspace-select.png" /></p>
+        </li>
+        <li><p>Once you're done, you should see a "Welcome" screen like below. Close the
+            "welcome" tab to open the regular editor.</p>
+
+            <p><img src="eclipse-welcome.png" /></p>
+        </li>
+        <li><p>Next, select "Windows &gt; Preferences" (PC) or "Eclipse &gt; Preferences" (Mac) in the menu. Then, select
+            "Java &gt; Installed JREs":</p>
+
+            <p><img src="eclipse-set-jre.png" /></p>
+        </li>
+        <li><p>Click the "Search" button and select the "Java" folder. This
+            folder should contain your installed JRE and JDK. (If it contains only
+            the installed JDK, that's also ok). You can probably
+            find this folder located at:</p>
+
+            <ul>
+                <li>Windows: <code>C:\Program Files\Java</code></li>
+                <li>Mac: <code>/Library/Java</code></li>
+            </ul>
+
+            <p>For example, on Windows:</p>
+
+            <p><img src="eclipse-java-select.png" /></p>
+        </li>
+        <li><p>After hitting "ok", you should see a screen with a line for either
+            both the JRE and the JDK, or just the JDK. Select the line for the JDK:</p>
+
+            <p><img src="eclipse-select-jdk.png" /></p>
+        </li>
+
+        <li><p>Click the "Apply and close" button.</p></li>
+
+        <li><p>Eclipse, by default, contains a fair degree of clutter. If you want
+            to minimize the clutter, feel free to close the "Task List" and
+            "Outline" tabs/views to the right.</p></li>
+    </ol>
+</div>
+</body>
+</html>
