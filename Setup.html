@@ -1,0 +1,161 @@
+
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Installing jGRASP</title>
+</head>
+<body>
+
+<h2 id="downloading-jgrasp">Downloading jGRASP</h2>
+
+<p>Go to the following page:</p>
+
+<ul>
+  <li><a href="https://www.jgrasp.org/">jGRASP Download</a></li>
+</ul>
+
+<p>This page contains an optional survey by the jGRASP authors; you may scroll down and skip it.
+We recommend installing the lastest stable, non-beta version of the jGRASP editor.
+
+At the time of writing, this was version <strong>2.0.6_04</strong>.
+Locate the appropriate download link and click it:</p>
+
+<ul>
+  <li>On <strong>Windows</strong>, choose <strong>jGRASP exe</strong></li>
+  <li>On <strong>macOS</strong>, choose <strong>jGRASP pkg</strong></li>
+  <li>On <strong>Linux</strong>, choose <strong>jGRASP zip</strong></li>
+</ul>
+
+<p><img src="./Installing jGRASP_files/jgrasp-download.png"></p>
+
+<p>Save the file to your desktop or another convenient location.</p>
+
+<h2 id="installing-jgrasp">Installing jGRASP</h2>
+
+<h3 id="windows" class="collapsable">Windows</h3>
+
+<p style="">Open the <code>.exe</code> file you just downloaded.  A setup wizard will appear.</p>
+
+<p style=""><img src="./Installing jGRASP_files/jgrasp-win-wizard.png"></p>
+
+<p style="">The default settings are reasonable for most users,
+and you can complete the installation by repeatedly clicking "Next".</p>
+
+<p style="">At this point, you will have a new jGRASP shortcut on your desktop.  Double-click it to open jGRASP:</p>
+
+<p style=""><img src="./Installing jGRASP_files/jgrasp-win-installed.png"></p>
+
+<p style="">If you see this, <strong>you're all set!</strong>  However, if you get the following error:</p>
+
+<p style=""><img src="./Installing jGRASP_files/jgrasp-missing-java.png"></p>
+
+<p style="">then your system does not yet have the JDK installed.
+Make sure you followed the <a href="https://farahman.github.io/jdk.html">JDK installation instructions</a>, and try again.</p>
+
+<h3 id="macos" class="collapsable">macOS</h3>
+
+<p>Open the <code>.pkg</code> file you just downloaded.
+You may receive an error about jGRASP being from an "unidentified developer":</p>
+
+<p><img src="./Installing jGRASP_files/jgrasp-mac-codesign.png"></p>
+
+<p>This is due to a macOS "feature" that makes it difficult to run applications not distributed via Apple's official channels.
+To run the jGRASP installer regardless, bypassing this "feature", right click the <code>.pkg</code> file and choose "open".
+You will see an installation wizard.</p>
+
+<p><img src="./Installing jGRASP_files/jgrasp-mac-installer.png"></p>
+
+<p>The default settings are reasonable for most users,
+and you can complete the installation by repeatedly clicking "Continue".</p>
+
+<p>You can now run jGRASP by opening <code>jGRASP.app</code> from the <code>Applications</code> folder.
+One way to do this is to press <strong>Cmd+Space</strong>, type "jGRASP", and press <strong>Enter</strong>:</p>
+
+<p><img src="./Installing jGRASP_files/jgrasp-mac-spotlight.png"></p>
+
+<p>If jGRASP opens successfully, then <strong>you're all set!</strong>
+However, if you see the following error:</p>
+
+<p><img src="./Installing jGRASP_files/jgrasp-mac-no-java.png"></p>
+
+<p>then you don't have the JDK installed.  Make sure you followed the <a href="https://farahman.github.io/jdk.html">JDK installation instructions</a>, and try again.</p>
+
+<h3 id="linux" class="collapsable collapsed">Linux</h3>
+
+<p style="display: none;">Extract the <code>.zip</code> file you just downloaded to some permanent location.
+<code>~/jgrasp</code>, <code>~/opt/jgrasp</code>, or <code>/usr/local/jgrasp</code> would all be reasonable locations, but anything will do.
+<code>cd</code> into that directory and run <code>java -jar jgrasp.jar</code>.
+If all goes well, you should see this:</p>
+
+<p style="display: none;"><img src="./Installing jGRASP_files/jgrasp-linux-installed.png"></p>
+
+<p style="display: none;">If you get an error about <code>java</code> being missing, follow the <a href="https://farahman.github.io/jdk.html">JDK installation instructions</a>, and try again.</p>
+
+<p style="display: none;">If you run into issues, or have additional information to contribute to this section,
+<a href="mailto:frahma02@ayr.edu">contact us</a>.</p>
+
+
+<script style="display: none;">
+    var showOnly = null;
+    if (navigator.appVersion.indexOf("Win")!=-1) {
+        showOnly="windows";
+    }
+    if (navigator.appVersion.indexOf("Mac")!=-1) {
+        showOnly="macos";
+    }
+    if (navigator.appVersion.indexOf("Linux")!=-1) {
+        showOnly="linux";
+    }
+
+    var els = document.getElementsByTagName('h3');
+    for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        if (!el.id) {
+            continue;
+        }
+        var contents = [];
+        var contentEl = el.nextSibling;
+        while (contentEl) {
+            if (contentEl.nodeType == Node.ELEMENT_NODE) {
+                var tag = contentEl.tagName.toLowerCase();
+                if (tag == 'h1' || tag == 'h2' || tag == 'h3') {
+                    break;
+                }
+                contents.push(contentEl);
+            }
+            contentEl = contentEl.nextSibling;
+        }
+        (function(el, contents) {
+            var visible = true;
+            el.onclick = function() {
+                visible = !visible;
+                for (var i = 0; i < contents.length; i++) {
+                    contents[i].style.display = visible ? '' : 'none';
+                }
+                el.className = visible ? 'collapsable' : 'collapsable collapsed';
+            }
+            el.className = 'collapsable';
+            if (showOnly && el.id != showOnly) {
+                el.onclick();
+            }
+        })(el, contents);
+    }
+</script>
+<style>
+    .collapsed {
+        text-decoration: underline;
+        color: blue;
+    }
+    .collapsable {
+        cursor: pointer;
+    }
+    .collapsable:before {
+        content: url(icon_contract.gif);
+    }
+    .collapsable.collapsed:before {
+        content: url(icon_expand.gif);
+    }
+</style>
+
+
+</body></html>
