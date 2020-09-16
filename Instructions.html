@@ -81,285 +81,25 @@ Online lab session on Wednesday will either be used to introduce a lab assignmen
 <hr noshade; color=#655555>
 <h2><a name="handin"> How to submit homework (or programming assignments)</a></h2>
 
-<h3>Programming assignments</h3>
+<h3>Submission of HW (Programming assignments)</h3>
+For every HW, there are specific submission instructions mentioned in the HW handout. Follow those instructions carefully.
 <ol>
-  <li> Make sure a filled out (and correct)
-    <a href="CoverSheet.pdf">cover sheet</a> is included with
-    your files.
-
-  <!-- <li> Make sure everyone who worked on the assignment has their name in each of the java files. -->
-    <br>
-    (See <a href="#groups">Working in Groups</a> below.)
-  <li> Zip your cover sheet and Java sources (No <code>.class</code>files please.)
-  <li> Find the assignment page on Blackboard.
-  <li> Upload this archive (.Zip) to Blackboard. <br>
-    Here is
-    <a href="https://help.blackboard.com/en-us/Learn/9.1_SP_10_and_SP_11/Student/060_Tests_and_Assignments/Submitting_Assignments">
-      Blackboard's help page for submitting assignments.</a>
+Submission Process:
+  <li> Please SUBMIT only a zip file when asked.
+  <li>
+  <li> Create a folder with your JAVA files (not class files), reflection sheet(if required in the HW) and <a href="CoverSheet.pdf">cover sheet</a>.
+  <li> Rename the folder to lastname_firstname.
+  <li> Zip the folder. (No rar, no separate files will be accepted or graded).
+  <li> Upload this .zip folder to Blackboard.
+  <li> If you plan on using a Late Day for a HW please email one of the TA’s.
 </ol>
-<!--
-<blockquote>
-  <b>NOTE:</b> If this "paperless" way of submitting assignments
-  doesn't work out, these procedures may change during the course of
-  the semester.
-</blockquote>
--->
+Here is <a href="https://help.blackboard.com/en-us/Learn/9.1_SP_10_and_SP_11/Student/060_Tests_and_Assignments/Submitting_Assignments"> Blackboard's help page for submitting assignments.</a>
 
 
-
-<!--
-
-<ul>
-  <li>
-       Typically, labs will be due on Fridays and homeworks on Tuesdays.
-       <br><br>
-  <li>
-       The &ldquo;deliverable&rdquo; of the assigment is to be <b>on paper</b>
-       and either <b>stapled</b> or <b>binder clipped</b> firmly
-       together.
-       <br><br>
-  <li>
-       Each Java file should have the following, filled-in
-       comment at its beginning:
-       <pre>
-/**
- **  Assignment:
- **  Authors:
- **/</pre>
-       After <b><code>Assignment:</code></b> put
-       the name of the assignment, e.g.,
-       <b><code>Homework 6</code></b> or
-       <b><code>Lab 3</code></b>, or what have you.
-       <br>
-       After <b><code>Authors:</code></b>
-       put the names of the authors of this assignment.
-       <br>
-       We <em class=red>will</em>
-       take off points if you are missing this comment.
-       <br>
-       <br>
-  <li>
-       These should be placed in &ldquo;the box&rdquo; in SciTech 3-212.
-       <br><br>
-  <li>
-       The files for the assignment should also be sent to the
-       official archive.  To do this, just send a email message to
-       <script>showemail2('ecs.syr.edu','royer')</script>
-       with a subject line of just <b>351submission</b> (no spaces)
-       and add the files as attachments.  If your mailer doesn't
-       do attachments, then just include all the files in your
-       message with clear separations between them and with
-       indications of the names of the files.
-       <p>
-	<b>NOTE:</b> Do <em class=red>not</em> send any
-	<code>.class</code> files or the instructor will be
-	very grumpy.
-       <br>
-  <li>
-       There should be only <b>one</b> assignment and archive copy
-       submitted from each group.
-       <blockquote>
-         <b>However</b>, if you hand in an assignment early and
-         later realize that you forgot something, or did something wrong,
-         then you may submit a revised version <b>provided</b>
-         (a) you clearly mark the revised version as <i>revised</i> and
-         (b) do this <i>before</i> the assignments due date.<br>
-         <b>Also</b>, we reserve the right to be irritated
-         if you engage in too much of this.
-       </blockquote>
-  <li>
-       <b>Remember</b>, no late assignments will be accepted.
-</ul>
--->
-
-<!--
-<hr noshade; color=#ff6666>
-
-<h2 align=center><a name="submit">
-      Setting up and using the
-      351submit script
-</a></h2>
-
-<h3>Set up</h3>
-
-To set things up to use the
-<a href="http://www.cis.syr.edu/courses/cis351/scripts/351submit">
-351submit</a> script do the following:
-<ol>
-  <li>
-       Add the following line to the bottom of your .cshrc file
-       <pre class=dgreen>
-       alias   351submit   /home/www/htdoc/courses/cis351/scripts/351submit
-       </pre>
-  <li>
-       Type to Unix:
-       <pre class=dgreen>
-       source ~/.cshrc
-       </pre>
-</ol>
-Once you have done this (correctly), you do not have to do it again.
-
-</pre>
-<h3>Use</h3>
-
-Once you have done the set up,
-to use the 351submit script to submit a homework (say homework number 4)
-do the following.
-<ol>
-  <li>
-       Type to Unix:
-       <pre class=dgreen>
-       351submit -h4
-       </pre>
-  <li>
-       Follow the directions.
-</ol>
-Whereas, to submit a lab (say, lab number 6) do:
-<ol>
-  <li>
-       Type to Unix:
-       <pre class=dgreen>
-       351submit -l6
-       </pre>
-  <li>
-       Follow the directions.
-</ol>
-Remember 351submit is only a humble shell script, so
-it is very fragile.
-
-<h3>Shortcuts</h3>
-
-There are some short cuts available in using this thing.  The general
-form of the 351submit command is:
-<font color=maroon>
-<pre class=dgreen>
-   351submit  [options] [files]
-
-   options == -h&lt;num>, Mark as HW&lt;num>
-
-              -l&lt;num>, mark as LAB&lt;num>
-</pre>
-</font>
-So for example, to submit the files
-<pre class=dgreen>
-   Foo.java
-   Wizbang.java
-   hw4.output
-   hw4.input
-</pre>
-for homework number 4, you may type to Unix:
-<pre class=dgreen>
-       351submit -h4 Foo.java Wizbang.java hw4.output hw4.input
-</pre>
-You will still be prompted for the names of the people in the
-group submitting the assignment, but that is all.
-
-
--->
-
-<hr noshade; color=#655555>
-
-<h2 ><a name="cover">
-      Assignment cover sheets
-</a></h2>
-
-<ul>
-  <li> <p>
-      The cover sheet lets you use ideas, code segments, etc. from
-      other people, Internet sources, etc. <b><i>with proper
-	  acknowledgement</i></b>.
-      </p>
-  <li>
-      <p>So long as your cover statement is truthful, your
-	borrowing will not be in violation of academic integrity
-	rules.
-    </p>
-
-    <p>Learn more about Academic <a href="https://farahman.github.io/aipolicy.html">Integrity Policy for CIS351 course</a>.</p>
-  <li>
-    <p>
-      <b>HOWEVER</b>, if we judge that your borrowing is
-      inappropriate, then we will take off points and issue a
-      warning.
-    </p>
-  <li>
-    <p>
-      <b>MOREOVER</b>, if you engage in repeated borrowing,
-      then our sanctions will grow ever more aggressive.
-    </p>
-    <li>
-    <p>
-      <b>Download</b> the <a href="CoverSheet.pdf">cover sheet</a> here.
-    </p>
-</ul>
-
-<hr noshade; color=#655555>
-
-<h2><a name="help">
-      How to ask questions in Piazza
-</a></h2>
-
-  <ul>
-  <li>
-    <p>You should only use Piazza for generic questions and answers. It is appropriate to ask/answer questions about things that were discussed in lecture or things you read. It is even appropriate to ask/answer clarification questions about programming assignment. </p>
-  <li><p>However, it is not appropriate to ask questions about source code that you have written for a programming assignment or for an answer to a question to include source code written for an assignment. </p>
-    <li><p>
-    Also, it is inappropriate to ask questions or give answers that might unduly help another student complete a programming assignment.</p>
-
-  <li><p>If you are not sure whether a question/answer is appropriate, use email to ask the instructor before posting it.</p>
-
-  <strong>Process:</strong> Before using Piazza, try to find the answer on your own. Then, and only then, you should use Piazza as follows. Piazza should be used as follows.
-
-  <ul>
-  <li>Check to see if your question has already been answered. (It’s annoying to ask questions that have already been answered and embarrassing for the answer to be let me Google that for you.)
-  Draft your question. (In your question you should describe what you know about the answer. For example, “I know the problem isn’t X because I’ve already tried Y.”</li>
-  <li>Proofread your question.
-  Post your question.</li>
-  <li>Remember not to post new questions in the discussion of an existing question because it will only be noticed by people who happen to be following the discussion.</li>
-</ul>
-</ul>
-<!--
-
-Remember that you need to submit test runs of your homeworks and
-labs together with the source code.
-
-
-Here are two options for
-capturing test runs.
-<ol>
-  <li> Use cut and paste from your terminal window into an emacs buffer
-       which you can save and print.
-       <br> <br>
-  <li> Use the <i>script</i> program.  To use the script program:
-       <ol type=a>
-	 <li>
-	      Type to Unix:
-	      <pre class=dgreen>
-    script</pre>
-	      You will then get the message
-	      <pre class=dgreen>
-    Script started, file is typescript </pre>
-	 <li>
-	      At that point, <i>everything</i> you do in that terminal window
-	      will be copied to the file typescript.
-	 <li>
-	      When you want to close off this copying, type to Unix (at the
-	      beginning of a line)
-	      <pre class=dgreen>
-    exit	      </pre>
-	      You will then get the message
-	      <pre class=dgreen>
-    Script done, file is typescript	      </pre>
-	 <li>
-	      You may then print the file <code>typescript</code>.
-
-       </ol>
-</ol>
--->
 <hr noshade; color=#655555>
 
 <h2><a name="why">
-      Why programming assignments are important
+      Why HW(programming assignments) are important
 </a></h2>
 <blockquote>
 
@@ -372,8 +112,8 @@ Hence, you may discuss programming assignments with other students who are curre
 Though you are entitled to discuss the programming assignments with other people, you must be courteous. Most importantly, students are not required, or even encouraged, to provide assistance. So, if asked, you should feel free to decline such a request and, if asking, you must not take offense if such a request is denied. In addition, neither the instructor(s) nor lab assistant(s) may provide as much assistance as you want. Most frequently, this happens when they think the assistance you have requested will prevent you from learning an important concept. Again, you must not take offense if a request is denied.
 
 <p>
-  A. Students are to work on their HW without consulting with anyone that is not explicitly approved by the instructor. You can always ask for help from TA, grader and the instructor.
-B. Students are allowed to discuss the meaning of HW programs or problems together but are expected to work totally independent of anyone that is not explicitly approved by the instructor when working on the solutions to a program or problem and when doing their coding.
+A. Students are to work on their HW without consulting with anyone that is not explicitly approved by the instructor. You can always ask for help from TA, grader and the instructor.<br>
+B. Students are allowed to discuss the meaning of HW programs or problems together but are expected to work totally independent of anyone that is not explicitly approved by the instructor when working on the solutions to a program or problem and when doing their coding.<br>
 C. In some cases, the instructor may distribute a written policy (possibly as a part of their syllabus) that specifies how much cooperation and joint work is permitted on their HW.
 <p>
 Policy A is the default policy that will be used unless the instructor specifies otherwise in writing (e.g., in their syllabus or in assignment instructions) indicating that one of the other policies will be followed. Violation of this policy will result in reporting for academic integrity violations. Students are to clarify with their instructors any questions they may have about how much cooperation and joint work is permitted on HW.
@@ -387,40 +127,31 @@ Policy A is the default policy that will be used unless the instructor specifies
 <hr noshade; color=#655555>
 
 <h2><a name="what">
-What we look for in programming assigments
+What we look for in HW(programming assigments)
 </a></h2>
-
 <blockquote>
-
 Writing a program is in many ways just like any other piece of
 writing: you want to be clear and to the point, you want the general
 organization to reflect your intent, and you want to have particular
 audiences in mind for a particular piece of writing.
 
 <p>
-
-The programs written for this course will have two distinct audiences.
-
+The programs written for this course will have two distinct audience :)
 <p>
-
 The first will be made up of the Java compiler (<tt>javac</tt>)
 and the Java interpreter (<tt>java</tt>).  These guys are picky on
 small matters of syntax and semantics, but beyond that they don't
 care what nonsense you shove at them.
-
 <p>
-
-The second audience for your work will be the person grading it.
-The grader will typically have a huge stack of assignments to wade
-through.  When he or she picks up another one of these
+The second audience for your work will be the person grading it, meaning the TAs and the professor. The course staffs typically have a huge stack of assignments to wade through.  When he or she picks up another one of these
 assignments, she wants to quickly ascertain certain things.
 <p>
-  Additionally, sometimes, we will use JUnit test classes to asses the correctness of your program. Hence, it is very important that you read the instructions of homework handout very careful and do everything as excatly required by the handout, so your program does not disqualify when it is auto-graded by a script.
-  <p>
-    Finally, for submitted programs (including labs and homeworks), you need to write your name in the class documentation section of the Java class that you will be writing. If you DO NOT include your name at the top of the java file, <b>2-5 points will be deducted.</b>
+Additionally, sometimes, we will use JUnit test classes to asses the correctness of your program. Hence, it is very important that you read the instructions of homework handout very careful and do everything as excatly required by the handout, so your program does not disqualify when it is auto-graded by a script.
+<p>
+Finally, for submitted programs (including labs and homeworks), you need to write your name in the class documentation section of the Java class that you will be writing. If you DO NOT include your name at the top of the java file, <b>few points will be deducted, based on the grading rubric mentioned in the handout.</b>
 <dl>
   <dt>
-       <b>Administrative details</b>
+<b>Administrative details</b>
   <dd>
        Who is this assignment from and what course-section are they in?  <br>
        If this is a multi-part assignment,
@@ -451,7 +182,7 @@ assignments, she wants to quickly ascertain certain things.
        Is the code correct and fully exercised?
       <br>
        If part of the program is not working,
-       is there a note on this in the assignment? <br>
+       is there a note on this in the assignment?
        <blockquote>
           If there is no such note, then the grader may assume that
           you didn't realize something was wrong or are trying to hide
@@ -481,16 +212,15 @@ assignments, she wants to quickly ascertain certain things.
 In general, the above are what <i>anyone</i> looking at another person's
 code would want to see.
 
-<p>
+<!-- <p>
 Your grade on a particular assignment will be based on:
 <br>&nbsp;&nbsp;&nbsp;
 80% &ndash; correctness, clarity, and quality of the solution
 <br>&nbsp;&nbsp;&nbsp;
-20% &ndash; documentation, write up, and general presentation
+20% &ndash; documentation, write up, and general presentation -->
 
 
 </blockquote>
-
 
 <hr noshade; color=#655555>
 
@@ -500,9 +230,9 @@ Working in Groups
 
 <ul>
   <li>
-       You may work in groups during labs.<br><br>
+       You may work in groups during labs.
   <li>
-If you worked in a group during lab, each of the group member needs to submit their OWN solution in their individual folder in blackboard. However, at the top of the java file, withing comments, you MUST write the names of all the group members. <br><br>
+If you worked in a group during lab, each of the group member needs to submit their OWN solution in their individual folder in blackboard.
 <li>
      You may share ideas, <b>but not code</b> with other groups during labs.
      <br><br>
@@ -511,22 +241,9 @@ If you worked in a group during lab, each of the group member needs to submit th
        Make sure you do your share of the work during labs. <br>
        Also you should understand all of the work in a given lab.  <br>
        If you don't do this, it will show on the tests.
-       <br><br>
        <li>
-           Unless otherwise stated, all the homework are to be done INDIVIDUALLY. (See more in <em><a name="why">Why programming assignments are important</a>).</em><br><br>
+           Unless otherwise stated, all the homework are to be done INDIVIDUALLY. (See more in <em><a name="why">Why programming assignments are important</a>).</em>
 </ul>
-
-<!-- <hr noshade; color=#655555>
-<h2><a name="TA">
-Teaching assistants
-</a></h2>
-<blockquote>
-Name: Ankit Prabhat Khare<br/>
-Email address: apkhare@syr.edu<br/>
-Office hours: TBA<br/>
-Office: TBA
-</blockquote> -->
-
 
 
 <hr noshade; color=#655555>
