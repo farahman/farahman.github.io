@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Farzana Rahman</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #1a2744; --accent: #d97706; --light-accent: #fef3c7;
+    --gray: #6b7280; --light-gray: #f9fafb; --border: #e5e7eb; --white: #ffffff;
+  }
+  body { font-family: 'Inter', sans-serif; color: #1f2937; background: var(--white); line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy); padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px; box-shadow: 0 2px 12px rgba(0,0,0,.3);
+  }
+  .nav-brand { color: var(--white); font-weight: 700; font-size: 1rem; letter-spacing: .5px; white-space: nowrap; }
+  .nav-links { display: flex; gap: 1.2rem; list-style: none; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,.8); text-decoration: none; font-size: .82rem; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #2d4270 60%, #1e3a5f 100%);
+    color: var(--white); padding: 5rem 2rem 4rem;
+  }
+  .hero-inner { max-width: 960px; margin: auto; display: flex; gap: 3rem; align-items: center; }
+  .hero-avatar {
+    width: 155px; height: 155px; border-radius: 50%;
+    border: 4px solid var(--accent); flex-shrink: 0;
+    overflow: hidden; background: #2d4270;
+  }
+  .hero-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-text h1 { font-size: 2.3rem; font-weight: 700; line-height: 1.2; }
+  .hero-text .title { color: var(--accent); font-weight: 500; font-size: 1rem; margin: .4rem 0 .2rem; }
+  .hero-text .dept { color: rgba(255,255,255,.75); font-size: .93rem; }
+  .hero-text .email { display: inline-block; margin-top: .8rem; color: var(--light-accent); font-size: .9rem; text-decoration: none; }
+  .hero-text .email:hover { text-decoration: underline; }
+  .badges { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+  .badge { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); color: var(--white); padding: .25rem .75rem; border-radius: 999px; font-size: .78rem; }
+
+  /* SECTIONS */
+  section { padding: 3.2rem 2rem; }
+  section:nth-child(even) { background: var(--light-gray); }
+  .section-inner { max-width: 960px; margin: auto; }
+  h2 { font-size: 1.45rem; font-weight: 700; color: var(--navy); padding-bottom: .5rem; border-bottom: 3px solid var(--accent); margin-bottom: 1.5rem; display: inline-block; }
+  h3 { font-size: 1.05rem; font-weight: 600; color: var(--navy); margin: 1.4rem 0 .6rem; }
+
+  /* NEWS */
+  .news-list { display: flex; flex-direction: column; gap: .75rem; }
+  .news-item { display: flex; gap: 1rem; align-items: flex-start; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: .85rem 1rem; }
+  .news-tag { flex-shrink: 0; padding: .2rem .65rem; border-radius: 999px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; }
+  .tag-grant { background: #d1fae5; color: #065f46; }
+  .tag-pub   { background: #dbeafe; color: #1e40af; }
+  .tag-talk  { background: #ede9fe; color: #5b21b6; }
+  .tag-news  { background: var(--light-accent); color: #92400e; }
+  .news-item p { font-size: .88rem; color: #374151; }
+  .news-item .news-date { font-size: .78rem; color: var(--gray); margin-top: .15rem; }
+
+  /* ABOUT */
+  .about-text p + p { margin-top: .9rem; }
+  .about-text { font-size: .97rem; color: #374151; }
+  .highlight-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px,1fr)); gap: 1rem; margin-top: 1.4rem; }
+  .hcard { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem; border-left: 4px solid var(--accent); }
+  .hcard h4 { font-size: .87rem; font-weight: 600; color: var(--navy); margin-bottom: .3rem; }
+  .hcard p { font-size: .81rem; color: var(--gray); }
+  .hcard a { color: var(--accent); text-decoration: none; }
+  .hcard a:hover { text-decoration: underline; }
+
+  /* TIMELINE (combined exp + edu) */
+  .timeline-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  @media(max-width:640px){ .timeline-cols { grid-template-columns: 1fr; } }
+  .timeline-col h3 { margin-top: 0; }
+  .timeline { display: flex; flex-direction: column; gap: 1.2rem; }
+  .titem { display: flex; gap: 1rem; }
+  .titem-dot { display: flex; flex-direction: column; align-items: center; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px; }
+  .titem-dot .line { width: 2px; background: var(--border); flex: 1; margin-top: 4px; }
+  .titem:last-child .line { display: none; }
+  .titem-body h4 { font-size: .95rem; font-weight: 600; color: var(--navy); }
+  .titem-body .sub { font-size: .84rem; color: var(--gray); }
+  .titem-body .date { display: inline-block; background: var(--light-accent); color: #92400e; font-size: .72rem; font-weight: 600; padding: .12rem .55rem; border-radius: 999px; margin-bottom: .25rem; }
+
+  /* RESEARCH */
+  .research-text { font-size: .96rem; color: #374151; }
+  .research-text p + p { margin-top: .9rem; }
+  .lab-card {
+    display: flex; align-items: center; gap: 1.5rem;
+    background: var(--navy); color: var(--white); border-radius: 12px;
+    padding: 1.5rem 2rem; margin-top: 1.6rem;
+  }
+  .lab-icon { font-size: 2.5rem; flex-shrink: 0; }
+  .lab-card h3 { color: var(--accent); margin: 0 0 .25rem; font-size: 1.1rem; }
+  .lab-card p { font-size: .85rem; color: rgba(255,255,255,.75); margin: 0; }
+  .lab-card a { display: inline-block; margin-top: .7rem; background: var(--accent); color: var(--white); padding: .35rem 1rem; border-radius: 6px; text-decoration: none; font-size: .82rem; font-weight: 600; }
+  .lab-card a:hover { background: #b45309; }
+
+  /* TEACHING */
+  .teaching-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1rem; }
+  .teach-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.2rem; }
+  .teach-card h4 { font-size: .92rem; font-weight: 700; color: var(--navy); margin-bottom: .5rem; }
+  .teach-card ul { list-style: none; padding: 0; }
+  .teach-card ul li { font-size: .82rem; color: #374151; padding: .2rem 0; border-bottom: 1px solid var(--border); }
+  .teach-card ul li:last-child { border-bottom: none; }
+  .teach-card ul li span { color: var(--gray); font-size: .76rem; }
+
+  /* SERVICE */
+  .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  @media(max-width:640px){ .service-grid { grid-template-columns: 1fr; } }
+  .service-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.3rem; }
+  .service-card h3 { margin-top: 0; font-size: 1rem; }
+  .service-card p, .service-card ul { font-size: .85rem; color: #374151; }
+  .service-card ul { padding-left: 1.1rem; }
+  .service-card ul li { margin-bottom: .35rem; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
+  .stag { background: var(--light-gray); border: 1px solid var(--border); border-radius: 6px; padding: .2rem .6rem; font-size: .76rem; color: #374151; }
+
+   /* AWARDS */
+  .awards-list { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .award-item { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1rem 1.3rem; border-bottom: 1px solid var(--border); }
+  .award-year { flex-shrink: 0; min-width: 72px; text-align: center; background: var(--navy); color: var(--accent); font-size: .78rem; font-weight: 700; padding: .3rem .5rem; border-radius: 6px; line-height: 1.3; }
+  .award-body h4 { font-size: .95rem; font-weight: 600; color: var(--navy); margin-bottom: .2rem; }
+  .award-body p { font-size: .85rem; color: var(--gray); margin: 0; }
+	
+   /* RECOMMENDATION / UNDERGRAD RESEARCH special cards */
+  .special-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.4rem; }
+  @media(max-width:640px){ .special-cards { grid-template-columns: 1fr; } }
+  .spec-card { border-radius: 12px; padding: 1.4rem; }
+  .spec-card.gold { background: var(--light-accent); border: 1px solid #fcd34d; }
+  .spec-card.blue { background: #eff6ff; border: 1px solid #bfdbfe; }
+  .spec-card h3 { margin-top: 0; color: var(--navy); font-size: 1rem; }
+  .spec-card p { font-size: .84rem; color: #374151; margin-top: .4rem; }
+  .spec-card ul { font-size: .84rem; color: #374151; padding-left: 1.1rem; margin-top: .4rem; }
+  .spec-card ul li { margin-bottom: .3rem; }
+
+  /* PUBLICATIONS */
+  .pub-list { list-style: none; display: flex; flex-direction: column; gap: .8rem; }
+  .pub-list li { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: .85rem 1.1rem; font-size: .87rem; color: #374151; border-left: 3px solid var(--navy); }
+  .pub-list li strong { color: var(--navy); }
+	
+	
+	/* IMPACT */
+  .impact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.2rem; }
+  .impact-card { background: var(--gray); border-radius: 12px; padding: 1.5rem 1.3rem; text-align: center; }
+  .impact-number { font-size: 2.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
+  .impact-label { font-size: .8rem; font-weight: 700; color: rgba(255,255,255,.9); text-transform: uppercase; letter-spacing: .6px; margin: .35rem 0 .7rem; }
+  .impact-card p { font-size: .82rem; color: rgba(255,255,255,.65); line-height: 1.5; margin: 0; }
+
+
+  /* CONTACT */
+  .contact-box { background: var(--navy); color: var(--white); border-radius: 14px; padding: 2.5rem; text-align: center; }
+  .contact-box p { color: rgba(255,255,255,.75); margin-bottom: 1.2rem; font-size: .95rem; }
+  .contact-box a.btn { display: inline-block; background: var(--accent); color: var(--white); padding: .7rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background .2s; }
+  .contact-box a.btn:hover { background: #b45309; }
+  .contact-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.2rem; flex-wrap: wrap; }
+  .contact-links a { color: var(--light-accent); font-size: .88rem; text-decoration: none; }
+  .contact-links a:hover { text-decoration: underline; }
+
+  footer { background: #111827; color: rgba(255,255,255,.4); text-align: center; padding: 1.2rem; font-size: .8rem; }
+
+  @media(max-width:600px){
+    .hero-inner { flex-direction: column; text-align: center; }
+    .hero-text h1 { font-size: 1.8rem; }
+    .badges { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">Farzana Rahman</span>
+  <ul class="nav-links">
+    <!--<li><a href="#news">News</a></li>-->
+    <li><a href="#about">About</a></li>
+    <li><a href="#exp-edu">Experience</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#impact">Impact</a></li>  
+	<li><a href="#awards">Awards</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+    <li><a href="#service">Service</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-avatar">
+      <img src="https://farahman.github.io/img/profile.jpg" alt="Farzana Rahman" onerror="this.parentElement.innerHTML='FR'"/>
+    </div>
+    <div class="hero-text">
+      <h1>Farzana Rahman</h1>
+      <p class="title">Associate Teaching Professor</p>
+      <p class="dept">Dept. of EECS · Syracuse University</p>
+      <a class="email" href="mailto:frahma02@syr.edu">frahma02 AT syr DOT edu</a>
+      <div class="badges">
+        <span class="badge">CS and AI Education</span>
+		<span class="badge">AIED Technology </span>  
+        <span class="badge">Human Centric Computing</span>
+        <span class="badge">Expanding Pathways into Computing</span>
+		<span class="badge">Accessible Software Engineering</span>
+		<span class="badge">Undergraduate Research</span>
+		<span class="badge">STEM Advocate</span>
+		<span class="badge">K-12 AI Literacy</span>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!!-- NEWS -->
+<section id="news">
+  <div class="section-inner">
+    <h2>News</h2>
+    <div class="news-cluster">
+      
+	  <div class="news-item">
+        <span class="news-tag tag-pub">Publication</span>
+        <div>
+          <p><strong>Mar 2026:</strong> Paper accepted at <strong>ACM ITiCSE'26 Conference</strong>: "Doing the Work? Student Perspectives on AI Tools in Computing Education." Congratulations to the team - <em>Elodie, Stephanie, and Ashmita&nbsp;</em>! </p>
+        </div>
+      </div>
+		
+	 <div class="news-item">
+        <span class="news-tag tag-pub">Publication</span>
+        <div>
+          <p><strong>Mar 2026:</strong> Paper accepted at <strong>ASEE'26 Conference</strong>: "Designing for All: Lessons from Teaching Accessibility with AI Agents in a Software Engineering Course."</p>
+        </div>
+      </div>
+		
+		
+	  <div class="news-item">
+        <span class="news-tag tag-pub">Publication</span>
+        <div>
+          <p><strong>Feb 2026:</strong> Paper accepted at <strong>ASEE St Lawrence'26 Conference</strong>: "LLMs Behind the Scenes: Teaching Assistant Experiences Integrating LLMs in Large Courses."</p>
+        </div>
+      </div>
+		
+	 <div class="news-item">
+        <span class="news-tag tag-pub">Publication</span>
+        <div>
+          <p><strong>Feb 2026:</strong> Paper accepted at <strong>HCI International'26 Conference</strong>: "Bridging Human Trust and Smart Technology: Understanding User Perceptions and Adoption Patterns of AI-Enabled IoT Devices in the United States". Congratulations to my undergrad research assistant <em>Daniel Han&nbsp;</em>!</p>
+        </div>
+      </div>
+		
+	  <div class="news-item">
+        <span class="news-tag tag-grant">Grant</span>
+        <div>
+          <p><strong>Jan 2026: </strong>Received <strong>NSF</strong> <strong>CS4ALL </strong>grant (#2524375) to expand next-generation computing access in Central New York high schools. <a href="https://www.nsf.gov/awardsearch/show-award?AWD_ID=2524375" target="_blank" style="color:var(--accent);">Visit site →</a></p>
+        </div>
+      </div>
+      
+	<div class="news-item">
+        <span class="news-tag tag-grant">Grant</span>
+        <div>
+          <p><strong>Nov 2024:</strong> Received <strong>Google exploreCSR Award</strong> focusing on &nbsp;cultivating next generation computing researchers through teaching, mentoring, and undergraduate research.&nbsp; <a href="https://triangle.github.io/" target="_blank" style="color:var(--accent);">Learn more →</a></p>
+         
+        </div>
+	</div>
+      <!--<div class="news-item">
+        <span class="news-tag tag-talk">Talk</span>
+        <div>
+          <p>Co-chairing the <strong>Academic Track of Grace Hopper Celebration</strong> — the world's largest conference for women in computing.</p>
+          <p class="news-date">Ongoing since 2018</p>
+        </div>
+      </div>-->
+    </div><!-- end .news-cluster -->
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <h2>About Me</h2>
+    <div class="about-text">
+      <p>I am an Associate Teaching Professor in the Department of <a href="https://ecs.syracuse.edu/academics/electrical-engineering-and-computer-science">Electrical Engineering and Computer Science (EECS)</a> at <a href="https://www.syracuse.edu/">Syracuse University</a>, where my work focuses on helping students grow into thoughtful, skilled, and socially responsible computing professionals. My career mission is to help create systemic change in engineering,&nbsp;computer science, and AI education by advancing evidence-based teaching practices, designing forward-looking curricula, and building research-driven programs that empower students from different backgrounds to thrive in computing. To pursue this mission, I engage in computing and AI education research while leading initiatives that reimagine how students learn, experience, and contribute to the field. My work integrates emerging areas such as AI education, human-centered computing, and accessible software engineering into experiential learning environments that encourage students to see technology not only as a technical discipline, but also as a tool for addressing human and societal challenges.</p>
+  </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE & EDUCATION -->
+<section id="exp-edu">
+  <div class="section-inner">
+    <h2>Experience</h2>
+    <div class="timeline-cols">
+      <div class="timeline-col">
+        <h3>🏛 Professional</h3>
+        <div class="timeline">
+          <div class="titem">
+            <div class="titem-dot"><div class="dot"></div><div class="line"></div></div>
+            <div class="titem-body">
+              <span class="date">Sep 2019 – Present</span>
+              <h4>Associate Teaching Professor</h4>
+              <p class="sub">EECS, Syracuse University</p>
+            </div>
+          </div>
+          <div class="titem">
+            <div class="titem-dot"><div class="dot"></div><div class="line"></div></div>
+            <div class="titem-body">
+              <span class="date">Jan 2018 – Aug 2019</span>
+              <h4>Visiting Assistant Professor</h4>
+              <p class="sub">SCIS, Florida International University</p>
+            </div>
+          </div>
+          <div class="titem">
+            <div class="titem-dot"><div class="dot"></div><div class="line"></div></div>
+            <div class="titem-body">
+              <span class="date">Aug 2013 – Dec 2017</span>
+              <h4>Assistant Professor &amp; Director, MEMS Lab</h4>
+              <p class="sub">Dept. of CS, James Madison University</p>
+            </div>
+          </div>
+          <div class="titem">
+            <div class="titem-dot"><div class="dot"></div></div>
+            <div class="titem-body">
+              <span class="date">Aug 2013 – Aug 2014</span>
+              <h4>Freshman Advisor</h4>
+              <p class="sub">Dept. of CS, James Madison University</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-col">
+        <h3>🎓 Education</h3>
+        <div class="timeline">
+          <div class="titem">
+            <div class="titem-dot"><div class="dot"></div><div class="line"></div></div>
+            <div class="titem-body">
+              <span class="date">2013</span>
+              <h4>Ph.D. in Computer Science</h4>
+              <p class="sub">Marquette University, WI, USA</p>
+            </div>
+          </div>
+          <div class="titem">
+            <div class="titem-dot"><div class="dot"></div><div class="line"></div></div>
+            <div class="titem-body">
+              <span class="date">2010</span>
+              <h4>M.S. in Computer Science</h4>
+              <p class="sub">Marquette University, WI, USA</p>
+            </div>
+          </div>
+          <div class="titem">
+            <div class="titem-dot"><div class="dot"></div></div>
+            <div class="titem-body">
+              <span class="date">2008</span>
+              <h4>B.Sc. in Computer Science &amp; Engineering</h4>
+              <p class="sub">Bangladesh University of Engineering and Technology (BUET)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-inner">
+    <h2>Research</h2>
+    <div class="research-text">
+      <p>My research focuses on advancing computer science and artificial intelligence education through evidence-based pedagogy, inclusive curriculum design, and technology-enhanced learning. I aim to close the research-to-practice gap by translating insights from computing education research into scalable classroom practices and tools. My work centers on three complementary pillars: <strong> (1) pathways and experiences:</strong> creating meaningful research and learning opportunities that connect students with socially relevant computing; <strong>(2) teaching and learning:</strong> investigating how students develop understanding in areas such as programming, database systems, and AI; and <strong>(3) outreach and mentoring: </strong>building supportive learning communities that expand access to computing education. I also study Artificial Intelligence in Education (AIED) and the role of AI-powered tools in supporting student learning across higher education and K–12 contexts, including how these technologies can help instructors teach effectively , provide  student-centered learning experiences, and support educator training . Complementing this work, my expertise also spans  human centric computing, focusing on mobile healthcare and&nbsp; healthcare data analytics  that integrate mobile systems into health and wellness environments to improve mental and physical wellbeing.&nbsp;&nbsp; </p>
+      <p>&nbsp;</p>
+    </div>
+
+    <div class="lab-card">
+      <div class="lab-icon">🔬</div>
+      <div>
+        <h3>ICARE Lab</h3>
+        <p>Innovation in Computing, AI, Responsibility &amp; Education</p>
+        <a href="https://farahman.github.io/" target="_blank">Visit Lab Page →</a>
+      </div>
+    </div>
+
+    <h3>External Grants</h3>
+    <div class="highlight-cards">
+      <div class="hcard">
+        <h4>NSF CS4ALL<span style="font-weight:400;color:var(--gray)">· NSF #2524375</span></h4>
+        <p>Collaborative Research: Supporting High School Computing Teachers with the Accessible Learning Labs. <a href="https://www.nsf.gov/awardsearch/show-award?AWD_ID=2524375" target="_blank">Site →</a></p>
+      </div>
+		
+	<div class="hcard">
+        <h4>NSF IUSE<span style="font-weight:400;color:var(--gray)">· NSF #2336941</span></h4>
+        <p>Experiential Accessible Learning Labs for Promoting Inclusive Software Development. <a href="https://www.nsf.gov/awardsearch/show-award?AWD_ID=2336941" target="_blank">Site →</a></p>
+      </div>
+	<div class="hcard">
+        <h4>NSF INCLUDES <span style="font-weight:400;color:var(--gray)">· NSF #1953431</span></h4>
+        <p>RESET: Re-Entry Pathways for Women in STEM via Emerging Technology. <a href="https://resetconference.syr.edu/" target="_blank">Site →</a></p>
+      </div>
+		
+	   <div class="hcard">
+        <h4>Inclusion Triangle <span style="font-weight:400;color:var(--gray)">· Google</span></h4>
+        <p>Cultivating Next Generation Computing Researchers through Teaching, Mentoring, and Undergraduate Research. <a href="https://resorc.github.io/web/" target="_blank">Site →</a></p>
+      </div>
+		
+	 <div class="hcard">
+        <h4>RESORC <span style="font-weight:400;color:var(--gray)">· Google &amp; TensorFlow</span></h4>
+        <p>Research Exposure in Socially Relevant Computing. <a href="https://resorc.github.io/web/" target="_blank">Site →</a></p>
+      </div>
+	
+			
+      <div class="hcard">
+        <h4>NSF SaTC<span style="font-weight:400;color:var(--gray)">· NSF #2104532</span></h4>
+        <p>Collaborative Research: SaTC: EDU: Developing Instructional Laboratories for Blockchain Security Applications. <a href="https://badd-labs.github.io/" target="_blank">Site →</a></p>
+      </div>
+		
+      <div class="hcard">
+        <h4>SU-ASCENT <span style="font-weight:400;color:var(--gray)">· NCWIT</span></h4>
+        <p>Aspiring Students in Computing and Engineering NeTwork.</p>
+      </div>
+      <div class="hcard">
+        <h4>MIND-HUB <span style="font-weight:400;color:var(--gray)">· SU ICCAE</span></h4>
+        <p>Online Hub to Mentor Computing Tutors for Inclusion Diversity.</p>
+      </div>
+
+    </div>
+
+    <h3>Selected Publications</h3>
+    <ul class="pub-list">
+		
+		<li>Rahman, F., &amp; Krutz , D. (2025). <strong>Fostering Accessible Design Skills with AI-Agents and Experiential Learning in Software Engineering Education</strong> ACM SIGCSE '25.</li>
+		
+		<li>Zhang, X., Jiao, Z., Rahman, F., &amp; Kim, B. (2025). <strong>Filling in the Missing Piece: Integrating Storage into CompOrg Courses</strong> ASEE Annual Conference'25.</li>
+		
+		<li>Rahman, F., Billionniere, E., Shashidhara, S. (2022). <strong>Identifying Effective Re-entry Pathways for Returning Women to Transition into Computing and Tech Education and Workforce.</strong> IEEE FIE '22.</li>
+      
+		<li>Rahman, F., Billionniere, E., &amp; Subhedar Prashant, V. (2022). <strong>Diversifying the Face of Computing through Re-entry Initiatives for Returning Women.</strong> ACM SIGCSE '22.</li>
+      
+	  <li>Rahman, F., &amp; Billionniere, E. (2021). <strong>Re-Entering Computing through Emerging Technology: Current State and Special Issue Introduction.</strong> ACM TOCE, v.21.</li>
+      
+	  <li>Rahman, F. (2020). <strong>Understanding Barriers and Motivations of Non-Traditional Students Learning Programming in an Online CS1 Course.</strong> ACM SIGITE '20.</li>
+      
+    </ul>
+    <p style="margin-top:.9rem; font-size:.87rem; color:var(--gray);">Access the full list on <a href="http://dblp.uni-trier.de/pers/hd/r/Rahman:Farzana" target="_blank" style="color:var(--accent);">DBLP →</a> and <a href="https://scholar.google.com/citations?user=178VrZ0AAAAJ&hl=en" target="_blank" style="color:var(--accent);">Google Scholar →</a></p>
+  </div>
+</section>
+	
+	
+<!-- IMPACT -->
+<section id="impact">
+  <div class="section-inner">
+    <h2>Impact</h2>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-number">2,000+</div>
+        <div class="impact-label">Students Taught</div>
+        <p>Undergraduate and graduate students taught across Syracuse University, Florida International University, and James Madison University over a 12+ year career.</p>
+      </div>
+      <div class="impact-card">
+        <div class="impact-number">400+</div>
+        <div class="impact-label">Reached via RESET</div>
+        <p>Returning professionals engaged through the NSF RESET conference, building re-entry pathways into emerging technology.</p>
+      </div>
+      <div class="impact-card">
+        <div class="impact-number">200+</div>
+        <div class="impact-label">Undergrads in Research</div>
+        <p>Undergraduate students exposed to computing research through the Google-funded RESORC program.</p>
+      </div>
+      <div class="impact-card">
+        <div class="impact-number">7+</div>
+        <div class="impact-label">Years Co-Chairing GHC</div>
+        <p>Co-chairing the Academic Track of the Grace Hopper Celebration since 2018 — the world's largest gathering of women in computing.</p>
+      </div>
+		
+		
+	   <div class="impact-card">
+        <div class="impact-number">CS4VA</div>
+        <div class="impact-label">Founder</div>
+        <p>Statewide K-12 CS pipeline building in Virginia. <a href="https://sites.google.com/view/cs4va/home" target="_blank">Learn more →</a></p>
+      </div>
+		
+		
+	  <div class="impact-card">
+        <div class="impact-number">BWCSE</div>
+        <div class="impact-label">Founder</div>
+        <p>Mentoring platform elevating Bangladeshi women in computing research. <a href="https://bwcse.wordpress.com/" target="_blank">Learn more →</a></p>
+      </div>
+		
+		
+    </div>
+  </div>
+</section>
+	
+<!-- IMPACT
+<section id="impact">
+  <div class="section-inner">
+    <h2>Impact</h2>
+    <div class="highlight-cards">
+      
+	  <div class="hcard">
+        <h4>Grace Hopper Co-Chair</h4>
+        <p>Academic track co-chair since 2018 at the world's largest women-in-computing conference.</p>
+      </div>
+		
+	<div class="hcard">
+        <h4>Founder: CS4VA</h4>
+        <p>Statewide K-12 CS pipeline building in Virginia. <a href="https://sites.google.com/view/cs4va/home" target="_blank">Learn more →</a></p>
+      </div>
+      <div class="hcard">
+        <h4>Founder: BWCSE</h4>
+        <p>Elevating Bangladeshi women in computing research. <a href="https://bwcse.wordpress.com/" target="_blank">Learn more →</a></p>
+      </div>
+	
+  </div>
+</section>-->
+	
+	
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-inner">
+    <h2>Awards &amp; Honors</h2>
+    <div class="awards-list">
+      <div class="award-item">
+        <div class="award-year">2025</div>
+        <div class="award-body">
+          <h4>IEEE Region One Outstanding Teaching Award</h4>
+          <p>In recognition of sustained excellence in teaching, mentoring, and educational leadership in the engineering community. <em>IEEE Region One.</em></p>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-year">2025</div>
+        <div class="award-body">
+          <h4>Chancellor's Citation for Excellence</h4>
+          <p>Outstanding Contributions to the Student Experience and University Initiatives. <em>Syracuse University.</em></p>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-year">2024</div>
+        <div class="award-body">
+          <h4>Meredith Teaching Recognition Award</h4>
+          <p><em>Syracuse University.</em></p>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-year">2023</div>
+        <div class="award-body">
+          <h4>College Educator of the Year</h4>
+          <p><em>Technology Alliance of Central New York (TACNY).</em></p>
+        </div>
+      </div>
+	   <div class="award-item">
+        <div class="award-year">2023-24</div>
+        <div class="award-body">
+          <h4>STEM Faculty Leadership Development Award</h4>
+          <p><em>Women in Science and Engine20ering (WiSE).</em></p>
+        </div>
+      </div>
+
+      <div class="award-item">
+        <div class="award-year">2022</div>
+        <div class="award-body">
+          <h4>Best Diversity Paper Award</h4>
+          <p><em>St. Lawrence Section, American Society of Engineering Education (ASEE).</em></p>
+        </div>
+      </div>
+      <div class="award-item" style="border-bottom:none;">
+        <div class="award-year">2020</div>
+        <div class="award-body">
+          <h4>Educator Extension Services Award</h4>
+          <p><em>National Center for Women and Information Technology (NCWIT).</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- TEACHING -->
+<section id="teaching">
+  <div class="section-inner">
+    <h2>Teaching</h2>
+    <div class="teaching-grid">
+      <div class="teach-card">
+        <h4>🏛 Syracuse University</h4>
+        <ul>
+          <li>CIS 351: Data Structures <span>Sp20, Fa20, Sp21, Fa21, Fa22, Sp23, Fa23, Sp24, Fa24, Fa25</span></li>
+          <li>CSE 283: Intro to Object-Oriented Design <span>Sp20, Sp21, Sp22, Fa24, Sp25, Fa25</span></li>
+		  <li>CIS 341: Computer Organization &amp; Programming Systems <span>Sp22, Sp23, Sp24, Sp25</span></li>
+          <li>CIS 400: Pervasive Computing <span>Fa20, Fa21, Sp22</span></li>
+		  <li>CIS 400: Human Computer Interaction <span>Sum24, Sp25</span></li>
+			<li>CIS 400: Accessbile Software Engineering <span>Sum25</span></li>   
+        </ul>
+      </div>
+      <div class="teach-card">
+        <h4>🌴 Florida International University</h4>
+        <ul>
+          <li>COP 2210: Computer Programming <span>Sp18–Su19</span></li>
+		  <li>COP 3530: Data Structures <span>Sp18–Sp19</span></li>
+          <li>CDA 4101: Structured Computer Organization <span>Sp18–Su19</span></li>
+        </ul>
+      </div>
+      <div class="teach-card">
+        <h4>🎓 James Madison University</h4>
+        <ul>
+          <li>CS 139/149: Object-Oriented Programming <span>Fa13–Fa14</span></li>
+          <li>CS 159: Advanced OOP <span>Fa14–Fa17</span></li>
+          <li>CS 240: Data Structures <span>Sp14–Fa16</span></li>
+          <li>CS 480: Mobile App Development <span>Sp15</span></li>
+          <li>CS 685: Secure Mobile Computing <span>Fa17</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+		
+
+<!-- SERVICE -->
+<section id="service">
+  <div class="section-inner">
+    <h2>Service</h2>
+
+    <!-- Recommendation & Undergrad Research -->
+    <div class="special-cards">
+      <div class="spec-card gold">
+        <h3>📝 Recommendation Letters</h3>
+        <p>I am happy to write letters of recommendation for students who have worked closely with me (research, coursework, or independent study). Please note:</p>
+        <ul>
+          <li>Request at least <strong>4–6 weeks</strong> in advance</li>
+          <li>Provide your CV/Resume, personal statement draft, and a list of programs/deadlines</li>
+          <li>Share any specific points you'd like highlighted</li>
+          <li>Send a reminder 1 week before the deadline</li>
+        </ul>
+      </div>
+      <div class="spec-card blue">
+        <h3>🔭 Undergraduate Research</h3>
+        <p>I actively recruit undergrad students for research projects. Opportunities include working on computing and AI education, role of genAI in CS learning, human centric computing, accessible software engineering, and educational outreach.</p>
+        <ul>
+          <li>Open to all undergrad majors in EECS</li>
+          <li>Can be taken as an independent study course</li>
+          <li>Schedule fills 2–3 weeks in advance — plan early</li>
+          <li>Email me or stop by office hours to discuss</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <h3>Conference Organizing</h3>
+    <div class="service-grid" style="margin-top:.5rem;">
+      <div class="service-card">
+        <h3>Conference and Journal</h3>
+        <ul>
+		  <li>Associate Editor, ACM Transactions on Computing Education (TOCE) Journal</li>	
+		  <li>Hybrid Co-Chair, ACM SIGCSE TS 2027</li> 	
+		  <li>Panel Chair, ACM SIGCSE TS Virtual 2026</li> 	
+		  <li>Associate Co-Chair, ACM SIGCSE Conference 2025</li> 	
+          <li>Founding Co-Chair, NSF RESET Conference 2021</li>
+		  <li>Faculty Track Co-Chair, Grace Hopper Celebration 2018–2019</li>
+          <li>Co-Chair, ACM-W Capital Area CAPWIC 2015–2017</li>
+        </ul>
+      </div>
+	  <div class="service-card">
+        <h3>Workshop</h3>
+        <ul>
+		  <li>Founding Co-Chair, IEEE PerIoT 2017–2019 (w/ IEEE PerCom)</li>
+          <li>Co-Chair, IEEE eIoT 2016–2017 (w/ IEEE COMPSAC)</li>
+          <li>Co-Chair, IEEE STPSA 2013–2015 (w/ IEEE COMPSAC)</li>
+        </ul>
+      </div>
+    </div>
+	  
+	<h3>Program Committee</h3>
+    <div class="service-card" style="margin-top:.5rem;">
+      <div class="service-tags">
+        <span class="stag">ACM SIGCSE</span>
+        <span class="stag">IEEE FIE </span>
+		<span class="stag">ASEE Annual Conference </span>
+		<span class="stag">Computing Education Journal</span>
+		<span class="stag">Elsevier Journal of Systems and Software</span>
+		<span class="stag">IEEE RESPECT</span>
+        <span class="stag">IEEE COMPSAC</span>
+        <span class="stag">IEEE NSysS</span>
+        <span class="stag">IEEE DependSys</span>
+        <span class="stag">IEEE DCAS</span>
+        <span class="stag">IEEE STPSA</span>
+        <span class="stag">ACM RACS</span>
+        <span class="stag">IEEE SocialCom</span>
+        <span class="stag">WiCyS</span>
+        <span class="stag">Grace Hopper Celebration</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-box">
+      <h2 style="color:var(--white); border-color:var(--accent);">Get in Touch</h2>
+      <p>I am actively recruiting undergraduate and graduate students for research projects. My schedule fills 3–4 weeks in advance, so please plan ahead and use email for faster responses.</p>
+      <a class="btn" href="mailto:frahma02@syr.edu">frahma02 AT syr DOT edu</a>
+      <div class="contact-links">
+	  <a href="https://www.linkedin.com/in/farzana-rahman-phd-syr/" target="_blank">LinkedIn</a>	  
+      <a href="http://dblp.uni-trier.de/pers/hd/r/Rahman:Farzana" target="_blank">DBLP</a>
+	  <a href="https://scholar.google.com/citations?user=178VrZ0AAAAJ&hl=en" target="_blank">Google Scholar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Farzana Rahman · Syracuse University · Department of EECS
+</footer>
+</body>
+</html>
