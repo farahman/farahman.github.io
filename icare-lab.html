@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ICARE Lab – Syracuse University</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1a2744;--accent:#d97706;--accent2:#2563eb;
+  --light-accent:#fef3c7;--gray:#6b7280;--light-gray:#f9fafb;
+  --border:#e5e7eb;--white:#fff;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:#1f2937;background:var(--white);line-height:1.6}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:var(--navy);height:62px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;box-shadow:0 2px 14px rgba(0,0,0,.35);
+}
+.nav-brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.nav-brand .logo{background:var(--accent);color:var(--white);font-weight:800;font-size:.85rem;padding:.25rem .55rem;border-radius:6px;letter-spacing:.5px}
+.nav-brand span{color:var(--white);font-weight:600;font-size:1rem}
+.nav-links{display:flex;gap:1.4rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.83rem;font-weight:500;transition:color .2s;padding:.3rem 0;border-bottom:2px solid transparent}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* ── PAGES ── */
+.page{display:none}
+.page.active{display:block}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,var(--navy) 0%,#2d4270 55%,#1e3a5f 100%);
+  color:var(--white);padding:5rem 2rem 4.5rem;
+}
+.hero-inner{max-width:960px;margin:auto}
+.hero-eyebrow{display:inline-block;background:rgba(217,119,6,.2);border:1px solid var(--accent);color:var(--accent);font-size:.78rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:.3rem .9rem;border-radius:999px;margin-bottom:1.2rem}
+.hero h1{font-size:2.6rem;font-weight:800;line-height:1.15;max-width:700px}
+.hero h1 span{color:var(--accent)}
+.hero p{color:rgba(255,255,255,.75);font-size:1.05rem;max-width:620px;margin-top:1rem}
+.hero-meta{display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap}
+.hero-meta-item{text-align:center}
+.hero-meta-item .num{font-size:2rem;font-weight:800;color:var(--accent)}
+.hero-meta-item .lbl{font-size:.75rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.5px}
+.hero-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:var(--white);padding:.25rem .8rem;border-radius:999px;font-size:.78rem}
+
+/* ── SECTION ── */
+section{padding:3.5rem 2rem}
+section:nth-child(even){background:var(--light-gray)}
+.sec-inner{max-width:960px;margin:auto}
+h2{font-size:1.45rem;font-weight:700;color:var(--navy);padding-bottom:.5rem;border-bottom:3px solid var(--accent);margin-bottom:1.6rem;display:inline-block}
+h3{font-size:1.05rem;font-weight:600;color:var(--navy);margin-bottom:.5rem}
+
+/* ── MISSION CARDS ── */
+.mission-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.1rem}
+.m-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.3rem;border-top:4px solid var(--accent)}
+.m-card .icon{font-size:1.8rem;margin-bottom:.7rem}
+.m-card h3{font-size:.93rem;margin-bottom:.4rem}
+.m-card p{font-size:.83rem;color:var(--gray)}
+
+/* ── PROJECTS ── */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.3rem}
+.proj-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:box-shadow .2s}
+.proj-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.1)}
+.proj-header{padding:1.2rem 1.3rem 0}
+.proj-tag{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:.2rem .6rem;border-radius:999px;margin-bottom:.6rem}
+.tag-nsf{background:#dbeafe;color:#1e40af}
+.tag-google{background:#d1fae5;color:#065f46}
+.tag-ongoing{background:#ede9fe;color:#5b21b6}
+.tag-ncwit{background:var(--light-accent);color:#92400e}
+.proj-card h3{font-size:1rem;margin-bottom:.3rem}
+.proj-card .proj-full{font-size:.78rem;color:var(--gray);margin-bottom:.5rem;font-style:italic}
+.proj-body{padding:.8rem 1.3rem 1.3rem;font-size:.85rem;color:#374151}
+.proj-body p{margin-bottom:.6rem}
+.proj-body .proj-meta{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
+.proj-meta span{background:var(--light-gray);border:1px solid var(--border);border-radius:6px;font-size:.74rem;padding:.15rem .55rem;color:#374151}
+.proj-link{display:inline-block;margin-top:.8rem;font-size:.8rem;font-weight:600;color:var(--accent);text-decoration:none}
+.proj-link:hover{text-decoration:underline}
+
+/* ── MEMBERS ── */
+.members-section h3{margin-top:1.4rem;font-size:.95rem;text-transform:uppercase;letter-spacing:.5px;color:var(--gray);border-bottom:1px solid var(--border);padding-bottom:.3rem}
+.members-section h3:first-child{margin-top:0}
+.member-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.9rem;margin-top:.8rem}
+.member-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem;display:flex;align-items:center;gap:.85rem}
+.member-avatar{width:42px;height:42px;border-radius:50%;background:var(--navy);color:var(--accent);font-weight:700;font-size:1rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.member-info h4{font-size:.88rem;font-weight:600;color:var(--navy)}
+.member-info p{font-size:.76rem;color:var(--gray)}
+.pi-card{background:var(--navy);border-radius:12px;padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1.2rem;margin-bottom:1.5rem}
+.pi-avatar{width:58px;height:58px;border-radius:50%;border:3px solid var(--accent);overflow:hidden;flex-shrink:0}
+.pi-avatar img{width:100%;height:100%;object-fit:cover}
+.pi-info h3{color:var(--white);font-size:1.05rem;margin-bottom:.15rem}
+.pi-info p{color:rgba(255,255,255,.7);font-size:.83rem}
+.pi-info a{color:var(--accent);font-size:.8rem;text-decoration:none}
+.pi-info a:hover{text-decoration:underline}
+.alumni-list{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.7rem}
+.alumni-tag{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:.35rem .75rem;font-size:.8rem;color:#374151}
+.alumni-tag span{color:var(--gray);font-size:.73rem}
+
+/* ── PUBLICATIONS ── */
+.pub-filter{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.3rem}
+.pub-filter button{border:1px solid var(--border);background:var(--white);border-radius:999px;padding:.3rem .9rem;font-size:.8rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;color:#374151}
+.pub-filter button.active,.pub-filter button:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.pub-year-group{margin-bottom:1.5rem}
+.pub-year-label{font-size:.78rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.6rem}
+.pub-list{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.pub-item{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:.85rem 1.1rem;font-size:.86rem;color:#374151;border-left:3px solid var(--navy);display:flex;gap:.8rem;align-items:flex-start}
+.pub-item .pub-type-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:5px}
+.pub-item strong{color:var(--navy)}
+.pub-item .venue{font-size:.78rem;color:var(--gray);margin-top:.2rem}
+.pub-item .pub-badge{display:inline-block;font-size:.7rem;font-weight:700;padding:.1rem .5rem;border-radius:4px;margin-left:.4rem;vertical-align:middle}
+.badge-conf{background:#dbeafe;color:#1e40af}
+.badge-journal{background:#d1fae5;color:#065f46}
+.badge-poster{background:#ede9fe;color:#5b21b6}
+.badge-award{background:var(--light-accent);color:#92400e}
+.pub-links{display:flex;gap:.5rem;margin-top:.3rem}
+.pub-links a{font-size:.74rem;color:var(--accent);text-decoration:none;font-weight:600}
+.pub-links a:hover{text-decoration:underline}
+
+/* ── IMPACT ── */
+.impact-hero{background:var(--navy);border-radius:16px;padding:2.5rem;margin-bottom:2rem}
+.impact-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1.2rem}
+.i-stat{text-align:center}
+.i-stat .num{font-size:2.6rem;font-weight:800;color:var(--accent);line-height:1}
+.i-stat .lbl{font-size:.75rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.5px;margin-top:.3rem}
+.impact-stories{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem}
+.i-story{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.3rem;border-top:4px solid var(--accent2)}
+.i-story h3{font-size:.97rem;margin-bottom:.5rem}
+.i-story p{font-size:.85rem;color:#374151}
+.i-story ul{font-size:.84rem;color:#374151;padding-left:1.1rem;margin-top:.5rem}
+.i-story ul li{margin-bottom:.3rem}
+.mentee-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.9rem;margin-top:.8rem}
+.mentee-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:.9rem 1rem;font-size:.84rem}
+.mentee-card strong{color:var(--navy);display:block;margin-bottom:.2rem}
+.mentee-card .mentee-now{font-size:.78rem;color:var(--gray)}
+
+/* ── FOOTER ── */
+footer{background:#111827;color:rgba(255,255,255,.4);text-align:center;padding:1.3rem;font-size:.8rem}
+footer a{color:rgba(255,255,255,.6);text-decoration:none}
+
+@media(max-width:600px){
+  .hero h1{font-size:1.8rem}
+  nav{padding:0 1rem}
+  .nav-links{gap:.8rem}
+  .nav-links a{font-size:.75rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#" onclick="showPage('home')">
+    <span class="logo">ICARE</span>
+    <span>Lab</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showPage('projects')" id="nav-projects">Projects</a></li>
+    <li><a href="#" onclick="showPage('members')" id="nav-members">Members</a></li>
+    <li><a href="#" onclick="showPage('publications')" id="nav-publications">Publications</a></li>
+    <!--<li><a href="#" onclick="showPage('impact')" id="nav-impact">Impact</a></li>-->
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: HOME
+════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Syracuse University · EECS</div>
+      <h1>Innovation in Computing,<br/><span>AI, Responsibility</span><br/>&amp; Education</h1>
+      <p>The ICARE Lab investigates how we can design more inclusive, effective, and innovative computing education experiences —  preparing the next generation of computing professionals.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><div class="num">81+</div><div class="lbl">Publications</div></div>
+        <div class="hero-meta-item"><div class="num">$1M+</div><div class="lbl">Total Funding</div></div>
+        <div class="hero-meta-item"><div class="num">300+</div><div class="lbl">Undergrads in Research</div></div>
+        <div class="hero-meta-item"><div class="num">440+</div><div class="lbl">RESET Attendees</div></div>
+        <div class="hero-meta-item"><div class="num">1,156</div><div class="lbl">Citations</div></div>
+      </div>
+      <div class="hero-pills">
+        <span class="pill">CS Education</span>
+        <span class="pill">AI in Learning</span>
+        <span class="pill">Broadening Participation</span>
+        <span class="pill">Accessible Computing</span>
+        <span class="pill">Undergraduate Research</span>
+        <span class="pill">Computing Degree Pathways</span>
+		<span class="pill">Human Centric Computing</span>
+		<span class="pill">Structured TA Mentoring</span>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="sec-inner">
+      <h2>Our Mission</h2>
+      <p style="font-size:.97rem;color:#374151;max-width:760px;margin-bottom:1.5rem;">
+        The ICARE Lab is directed by <strong>Dr. Farzana Rahman</strong>, Associate Teaching Professor in the Department of Electrical Engineering and Computer Science at Syracuse University. Our work sits at the intersection of computing education research, AI-enhanced learning, and human inclusive STEM education — building evidence-based tools and practices that make computing education and research more accessible and inclusive for all learners.
+      </p>
+      <div class="mission-grid">
+        <div class="m-card">
+          <div class="icon">🎓</div>
+          <h3>Innovative Pedagogy</h3>
+          <p>Designing and evaluating evidence-based teaching strategies — active learning, POGIL, flipped classrooms — to reduce DFW rates in gateway CS courses.</p>
+        </div>
+        <div class="m-card">
+          <div class="icon">🤖</div>
+          <h3>AI in Computing Education</h3>
+          <p>Investigating the role of LLMs and AI pedagogical agents in student learning, including GenAI tool use by undergraduate TAs.</p>
+        </div>
+        <div class="m-card">
+          <div class="icon">♿</div>
+          <h3>Accessible Computing</h3>
+          <p>Developing experiential labs and curricula for accessible software development, integrating WCAG and inclusive design into CS courses.</p>
+        </div>
+        <div class="m-card">
+          <div class="icon">🌍</div>
+          <h3>Broadening Participation</h3>
+          <p>Creating pathways for women, returning professionals, and systemically excluded students to enter and thrive in computing and STEM careers.</p>
+        </div>
+        <div class="m-card">
+          <div class="icon">🔬</div>
+          <h3>Undergraduate Research</h3>
+          <p>Exposing undergraduates to the full research cycle — from problem formulation to publication — through immersive year-long programs like RESORC.</p>
+        </div>
+        <div class="m-card">
+          <div class="icon">🏫</div>
+          <h3>K–12 &amp; Community Outreach</h3>
+          <p>Expanding the computing workforce pipeline through workshops, hands-on training, and teacher professional development programs in Central New York and beyond.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-inner">
+      <h2>Lab Director</h2>
+      <div class="pi-card">
+        <div class="pi-avatar"><img src="https://farahman.github.io/img/profile.jpg" alt="Dr. Farzana Rahman" onerror="this.parentElement.innerHTML='FR'" style="font-weight:700;font-size:1.1rem;color:#d97706;display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#2d4270"/></div>
+        <div class="pi-info">
+          <h3>Dr. Farzana Rahman</h3>
+          <p>Associate Teaching Professor, Dept. of EECS, Syracuse University</p>
+          <p style="margin-top:.3rem">IEEE Region One Outstanding Teaching Award 2025 · Chancellor's Citation for Excellence 2025 · Meredith Teaching Recognition Award 2024</p>
+          <a href="https://farahman.github.io/" target="_blank">farahman.github.io →</a>
+        </div>
+      </div>
+      <p style="font-size:.9rem;color:#374151">Dr. Rahman has over 12 years of experience in computing education research, with 81+ peer-reviewed publications in ACM SIGCSE, IEEE FIE, ASEE, ACM TOCE, and IEEE RESPECT. Her research is funded by NSF, Google Research, Google TensorFlow, NCWIT, Access Computing, and STARS Computing Corps. She serves as Associate Editor of ACM Transactions on Computing Education (TOCE) and Program Co-Chair of ACM SIGCSE 2025 and 2026.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: PROJECTS
+════════════════════════════════════════════ -->
+<div class="page" id="page-projects">
+  <div style="background:var(--navy);padding:3rem 2rem 2.5rem;color:var(--white)">
+    <div style="max-width:960px;margin:auto">
+      <h1 style="font-size:2rem;font-weight:800">Research Projects</h1>
+      <p style="color:rgba(255,255,255,.7);margin-top:.5rem">Active and recent funded research initiatives from the ICARE Lab.</p>
+    </div>
+  </div>
+  <section style="padding-top:2.5rem">
+    <div class="sec-inner">
+      <div class="proj-grid">
+
+        <div class="proj-card">
+          <div class="proj-header">
+            <span class="proj-tag tag-nsf">NSF Funded</span>
+            <h3>RESET Conference</h3>
+            <p class="proj-full">Re-Enter STEM through Emerging Technology</p>
+          </div>
+          <div class="proj-body">
+            <p>A national NSF-funded conference identifying re-entry pathways for women with career breaks to transition into emerging technology academic and industry pipelines. The inaugural RESET '21 conference hosted <strong>440+ attendees</strong> and 38 speakers across 38 technical sessions.</p>
+            <div class="proj-meta">
+              <span>2020–2022</span><span>PI: Rahman</span>
+            </div>
+            <a class="proj-link" href="https://resetconference.syr.edu/" target="_blank">Visit RESET Site →</a>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-header">
+            <span class="proj-tag tag-google">Google Funded</span>
+            <h3>RESORC</h3>
+            <p class="proj-full">Research Exposure in Socially Relevant Computing</p>
+          </div>
+          <div class="proj-body">
+            <p>A year-long immersive undergraduate research engagement program in the EECS department, exposing students to the full computing research cycle — from literature review to oral presentation. Focuses on women and historically underrepresented groups. <strong>300+ students engaged since 2021.</strong></p>
+            <div class="proj-meta">
+              <span>2021–2023</span><span>PI: Rahman</span>
+            </div>
+            <a class="proj-link" href="https://resorc.github.io/web/" target="_blank">Visit RESORC Site →</a>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-header">
+            <span class="proj-tag tag-google">Google Funded</span>
+            <h3>The Inclusion Triangle</h3>
+            <p class="proj-full">Cultivating Next Generation Computing Researchers through Teaching, Mentoring, and Undergraduate Research</p>
+         </div>
+          <div class="proj-body">
+            <p>A new Google Research-funded initiative designed to systematically cultivate diversity in computing through three interconnected pillars: inclusive classroom pedagogy, structured mentoring for underrepresented students, and undergraduate research engagement.</p>
+            <div class="proj-meta">
+              <span>2025–2027</span><span>PI: Rahman</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-header">
+            <span class="proj-tag tag-nsf">NSF Funded</span>
+            <h3>CS4ALL — Central New York</h3>
+            <p class="proj-full">Supporting High School Computing Teachers with Accessible Learning Labs</p>
+          </div>
+          <div class="proj-body">
+            <p>Collaborative NSF CSforAll project with RIT expanding access to next-generation computing education for high school students across Central New York. Addresses challenges faced by educators in teaching rapidly evolving topics — AI, ML, cybersecurity, and algorithmic bias.</p>
+            <div class="proj-meta">
+              <span>2026–2029</span><span>Co-PI: Rahman</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-header">
+            <span class="proj-tag tag-nsf">NSF Funded</span>
+            <h3>Accessible Learning Labs</h3>
+            <p class="proj-full">Experiential Accessible Learning Labs for Promoting Inclusive Software Development</p>
+          </div>
+          <div class="proj-body">
+            <p>Collaborative NSF project with RIT developing hands-on experiential laboratories teaching accessible and responsible software development. Students learn WCAG guidelines, color blindness simulation, localization, and assistive technology integration through project-based learning.</p>
+            <div class="proj-meta">
+              <span>2024–2029</span><span>Co-PI at SU</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-header">
+            <span class="proj-tag tag-ongoing">Ongoing Research</span>
+            <h3>Role of AI Tech &amp; GenAI in Computing Education</h3>
+            <p class="proj-full">LLMs, AI Agents, and ChatGPT in Undergraduate CS Learning</p>
+          </div>
+          <div class="proj-body">
+            <p>Investigating how generative AI tools — including ChatGPT, LLM-enhanced error messages, and AI pedagogical agents — shape student learning, TA effectiveness, and course outcomes in introductory and upper-level CS courses. Exploring both benefits and risks of AI adoption in computing classrooms.</p>
+            <p>Recent work examines ChatGPT use strategies by undergraduate TAs in large CS2 courses (SIGCSE 2025), and the impact of AI on learning outcomes in intro computing (ASEE StLawrenece and ACM ITiCSE).</p>
+            <div class="proj-meta">
+              <span>2026–2029</span><span>ACM ITiCSE 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-header">
+            <span class="proj-tag tag-ncwit">NCWIT Funded</span>
+            <h3>SU-ASCENT</h3>
+            <p class="proj-full">Aspiring Students in Computing &amp; Engineering Network</p>
+          </div>
+          <div class="proj-body">
+            <p>NCWIT-funded program building a network of aspiring students in computing and engineering at Syracuse University, creating community, mentoring, and professional development pathways for underrepresented students.</p>
+            <div class="proj-meta">
+              <span>2020–ongoing</span><span>PI: Rahman</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-header">
+            <span class="proj-tag tag-nsf">NSF Co-PI</span>
+            <h3>Blockchain Security Education</h3>
+            <p class="proj-full">SaTC EDU: Instructional Laboratories for Blockchain Security</p>
+          </div>
+          <div class="proj-body">
+            <p>Collaborative NSF SaTC EDU project developing instructional lab modules for blockchain security applications, creating hands-on curricula for undergraduate and graduate students in cybersecurity education.</p>
+            <div class="proj-meta">
+              <span>2021–2025</span><span>Co-PI</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+	
+	
+	
+	
+<!-- ═══════════════════════════════════════════
+     PAGE: MEMBERS
+════════════════════════════════════════════ -->
+<div class="page" id="page-members">
+  <div style="background:var(--navy);padding:3rem 2rem 2.5rem;color:var(--white)">
+    <div style="max-width:960px;margin:auto">
+      <h1 style="font-size:2rem;font-weight:800">Lab Members</h1>
+      <p style="color:rgba(255,255,255,.7);margin-top:.5rem">Current students and collaborators. </p>
+    </div>
+  </div>
+	
+  <section style="padding-top:2.5rem">
+    <div class="sec-inner members-section">
+
+      <div class="pi-card">
+        <div class="pi-avatar"><img src="https://farahman.github.io/img/profile.jpg" alt="Dr. Farzana Rahman" onerror="this.parentElement.style.background='#2d4270'"/></div>
+        <div class="pi-info">
+          <h3>Dr. Farzana Rahman — PI</h3>
+          <p>Associate Teaching Professor, Dept. of EECS, Syracuse University</p>
+          <a href="https://farahman.github.io/" target="_blank">farahman.github.io →</a>
+        </div>
+      </div>
+
+      <h3>Current Students</h3>
+      <div class="member-grid">
+
+		  <div class="member-card">
+			  <div class="member-avatar">CL</div>
+			  <div class="member-info"><h4>Daniel Han</h4><p>BS CS · SU</p><p style="font-size:.73rem;color:var(--gray)">AIED Technology</p></div>
+		  </div>
+
+
+		  <div class="member-card">
+			  <div class="member-avatar">CL</div>
+			  <div class="member-info"><h4>Tamar Shuster</h4><p>BS CS · SU</p><p style="font-size:.73rem;color:var(--gray)"> AI Education</p></div>
+		  </div>	
+
+		  <div class="member-card">
+			  <div class="member-avatar">CL</div>
+			  <div class="member-info"><h4>Carla Lopez</h4><p>MS Software Eng · RIT</p><p style="font-size:.73rem;color:var(--gray)">Accessible computing education</p></div>
+		  </div>
+
+		  <div class="member-card">
+			  <div class="member-avatar">ET</div>
+			  <div class="member-info"><h4>Ursula Parker</h4><p>Undergrad · RIT</p><p style="font-size:.73rem;color:var(--gray)">Accessibility in SE education</p></div>
+		  </div>	
+       </div>
+     
+      <h3>Collaborators</h3>
+      <div class="member-grid">
+        
+		<div class="member-card">
+          <div class="member-avatar">DK</div>
+          <div class="member-info"><h4>Dr. Daniel Krutz</h4><p>Associate Professor · RIT</p><p style="font-size:.73rem;color:var(--gray)">Accessible Learning Labs</p></div>
+        </div>
+		<div class="member-card">
+          <div class="member-avatar">EB</div>
+          <div class="member-info"><h4>Dr. Elodie Billionniere</h4><p>Professor · MDC</p><p style="font-size:.73rem;color:var(--gray)">Computing Education</p></div>
+        </div>
+		
+		 <div class="member-card">
+          <div class="member-avatar">SL</div>
+          <div class="member-info"><h4>Dr. Stephanie Lunn</h4><p>Assistant Professor · FIU</p><p style="font-size:.73rem;color:var(--gray)">Computing and AI Education</p></div>
+        </div>
+		
+        <div class="member-card">
+          <div class="member-avatar">EH</div>
+          <div class="member-info"><h4>Dr. Endadul Hoque</h4><p>Assistant Professor · SU</p><p style="font-size:.73rem;color:var(--gray)">Cybersecurity Education and Accessible Learning </p></div>
+        </div>
+			 
+	    <div class="member-card">
+          <div class="member-avatar">LB</div>
+          <div class="member-info"><h4>Dr. Lina Battestilli</h4><p>Teaching Professor · NCSU</p><p style="font-size:.73rem;color:var(--gray)">Computing Education and TA Training</p></div>
+        </div>		 
+      </div>
+		  	  	  
+    </div>
+  </section>
+</div>
+
+	
+	
+
+<!-- ═══════════════════════════════════════════
+     PAGE: PUBLICATIONS
+════════════════════════════════════════════ -->
+<div class="page" id="page-publications">
+  <div style="background:var(--navy);padding:3rem 2rem 2.5rem;color:var(--white)">
+    <div style="max-width:960px;margin:auto">
+      <h1 style="font-size:2rem;font-weight:800">Publications</h1>
+      <p style="color:rgba(255,255,255,.7);margin-top:.5rem">81+ peer-reviewed publications · 1,156 citations · h-index 16 · i10-index 33</p>
+      <div style="display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap">
+        <a href="https://scholar.google.com/citations?user=178VrZ0AAAAJ&hl=en" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;background:#4285f4;color:#fff;padding:.4rem 1.1rem;border-radius:6px;text-decoration:none;font-size:.83rem;font-weight:600">🎓 Google Scholar</a>
+        <a href="https://dblp.org/pid/52/6838.html" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);padding:.4rem 1.1rem;border-radius:6px;text-decoration:none;font-size:.83rem;font-weight:600">📚 DBLP Profile</a>
+      </div>
+    </div>
+  </div>
+  <section style="padding-top:2rem">
+    <div class="sec-inner">
+      <div class="pub-filter">
+        <button class="active" onclick="filterPubs('all',this)">All</button>
+        <button onclick="filterPubs('2026',this)">2026</button>
+        <button onclick="filterPubs('2025',this)">2025</button>
+        <button onclick="filterPubs('2024',this)">2024</button>
+        <button onclick="filterPubs('2023',this)">2023</button>
+        <button onclick="filterPubs('2022',this)">2022</button>
+        <button onclick="filterPubs('2021',this)">2021</button>
+        <button onclick="filterPubs('older',this)">2020 &amp; Earlier</button>
+      </div>
+
+      <div id="pub-container">
+
+        <div class="pub-year-group" data-year="2026">
+          <div class="pub-year-label">2026 — To Appear</div>
+          <ul class="pub-list">
+           
+			  
+             <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Krutz, D., Liu, Y. <em>Designing for All: Lessons from Teaching Accessibility with AI Agents in a Software Engineering Course.</em> <span class="pub-badge badge-conf">ASEE 2026</span></div></li>
+            
+			  <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Boyina, R., Han, D. <em>Bridging Human Trust and Smart Technology: Understanding User Perceptions of AI-Enabled IoT Devices.</em> <span class="pub-badge badge-conf">HCI International 2026</span></div></li>
+            
+			  <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Krutz, D. <em>Fostering Accessible Design Skills with AI-Agents and Experiential Learning in Software Engineering Education.</em> <span class="pub-badge badge-poster">Poster</span><span class="pub-badge badge-conf">ACM SIGCSE 2026</span></div></li>
+            
+			  <li class="pub-item"><div class="pub-type-dot"></div><div>Parker, U., Malachowsky, S., <strong>Rahman, F.</strong>, Krutz, D. <em>Teaching Responsible Computing Using the Accessible Learning Labs.</em> <span class="pub-badge badge-poster">Poster</span><span class="pub-badge badge-conf">ACM SIGCSE 2026</span></div></li>
+          
+			</ul>
+        </div>
+
+        <div class="pub-year-group" data-year="2025">
+          <div class="pub-year-label">2025</div>
+          <ul class="pub-list">
+            <li class="pub-item"><div class="pub-type-dot"></div><div>Zhang, X., <strong>Rahman, F.</strong>, Kim, B. <em>Exploring the role of peer code review and debugging in learning object-oriented programming.</em> <span class="pub-badge badge-conf">ASEE 2025</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong> <em>Examining Undergraduate Computing Majors' Awareness and Perception on the Gender Gap in Computing Research Careers.</em> <span class="pub-badge badge-conf">EDULEARN 2025</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div>Moses, H., Trapatsos, E., <strong>Rahman, F.</strong>, Malachowsky, S., Krutz, D. <em>Presenting Computing Accessibility Education Using Experiential Labs.</em> <span class="pub-badge badge-conf">ACM SIGCSE 2025</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong> <em>Shaping the next generation of computing researchers through a year-long immersive undergraduate research experience in socially relevant computing.</em> <span class="pub-badge badge-poster">Poster/Lightning</span><span class="pub-badge badge-conf">ACM SIGCSE 2025</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong> <em>Leveraging or Limiting: Strategies and Implications of ChatGPT Use by Undergraduate TAs in Large CS2 Courses.</em> <span class="pub-badge badge-poster">Lightning Talk</span><span class="pub-badge badge-conf">ACM SIGCSE 2025</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div>Lopez, C., Malachowsky, S., <strong>Rahman, F.</strong>, Krutz, D. <em>Supporting Experiential Computing Education With the Accessible Learning Labs.</em> <span class="pub-badge badge-poster">Poster</span><span class="pub-badge badge-conf">CCSC NE 2025</span></div></li>
+          </ul>
+        </div>
+
+        <div class="pub-year-group" data-year="2024">
+          <div class="pub-year-label">2024</div>
+          <ul class="pub-list">
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Boyina, R. <em>Analyzing IoT and smart device usage trend by adult population in USA.</em> <span class="pub-badge badge-conf">ASEE 2024</span></div></li>
+          </ul>
+        </div>
+
+        <div class="pub-year-group" data-year="2023">
+          <div class="pub-year-label">2023</div>
+          <ul class="pub-list">
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Billionniere, E., Shashidhara, S.S. <em>Identifying Effective Re-entry Pathways for Returning Women to Transition into Computing and Tech Education and Workforce.</em> <span class="pub-badge badge-conf">IEEE FIE 2023</span></div></li>
+          </ul>
+        </div>
+
+        <div class="pub-year-group" data-year="2022">
+          <div class="pub-year-label">2022</div>
+          <ul class="pub-list">
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Billionniere, E., Shashidhara, S.S. <em>NSF RESET: A Conference to Support Returning Women's Transition to Computing.</em> <span class="pub-badge badge-conf">ASEE 2022</span><span class="pub-badge badge-award">🏆 Best Diversity Paper</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div>Billionniere, E., <strong>Rahman, F.</strong> <em>Women of Color in Emerging Technology: Breaking Down the Barriers.</em> <span class="pub-badge badge-conf">ASEE 2022</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Billionniere, E., Subhedar, V. <em>Diversifying the Face of Computing through Re-entry Initiatives for Returning Women.</em> <span class="pub-badge badge-poster">Poster</span><span class="pub-badge badge-conf">ACM SIGCSE 2022</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div>Billionniere, E., <strong>Rahman, F.</strong> <em>Reskilling and Upskilling Women in Emerging Technologies for the Future of Work.</em> <span class="pub-badge badge-conf">SITE 2022</span></div></li>
+          </ul>
+        </div>
+
+        <div class="pub-year-group" data-year="2021">
+          <div class="pub-year-label">2021</div>
+          <ul class="pub-list">
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Billionniere, E. <em>Re-Entering Computing through Emerging Technology: Current State and Special Issue Introduction.</em> <span class="pub-badge badge-journal">Journal</span><span class="pub-badge badge-conf">ACM TOCE, v.21</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Billionniere, E., Marshall, B., Seo, H., Forman, T. <em>Debugging the Diversity Tech's Gap through (Re-)entry Initiatives in Emerging Technologies for Women.</em> <span class="pub-badge badge-conf">ACM SIGCSE 2021</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Tyagi, J. <em>Investigating the Role of Different Prep Pathways on CS2 Performance Across Three Different Majors.</em> <span class="pub-badge badge-conf">ACM SIGITE 2021</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Billionniere, E., Gates, A.Q., Stukes, F. <em>Equipping and Empowering Faculty through Professional Development to Create a Future-Ready Workforce.</em> <span class="pub-badge badge-conf">ACM SIGITE 2021</span></div></li>
+          </ul>
+        </div>
+
+        <div class="pub-year-group" data-year="older">
+          <div class="pub-year-label">2020 &amp; Earlier (Selected)</div>
+          <ul class="pub-list">
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong> <em>Understanding Barriers and Motivations of Non-Traditional Students Learning Programming in an Online CS1 Course.</em> <span class="pub-badge badge-conf">ACM SIGITE 2020</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Solis, T. <em>Transforming the Learning Experience of Non-Traditional Students in an Online CS1 Course through Peer-Instruction.</em> <span class="pub-badge badge-conf">ACM SIGCSE 2020</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Billionniere, E., Brown, Q., Gates, A.Q. <em>RESET: Finding Re-Entry Pathways for Women in STEM.</em> <span class="pub-badge badge-conf">ACM SIGCSE 2020</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Hoque, M.E., Ahamed, S.I. <em>AnonPri: A secure anonymous private authentication protocol for RFID systems.</em> <span class="pub-badge badge-journal">Journal</span><span class="pub-badge badge-conf">Elsevier Info. Sciences, 2017</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Bhuiyan, M.Z.A., Ahamed, S.I. <em>A privacy preserving framework for RFID based healthcare systems.</em> <span class="pub-badge badge-journal">Journal</span><span class="pub-badge badge-conf">Future Gen. Comp. Syst., 2017</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div>Akter, S., <strong>Rahman, F.</strong>, Al Islam, A.B.M.A. <em>Securing app distribution process of iOS exploiting the notion of authentic update.</em> <span class="pub-badge badge-conf">IEEE NSysS 2016</span><span class="pub-badge badge-award">🏆 Best Paper</span></div></li>
+            <li class="pub-item"><div class="pub-type-dot"></div><div><strong>Rahman, F.</strong>, Ahamed, S.I. <em>I am not a goldfish in a bowl: A Privacy Preserving Framework for RFID based Healthcare Systems.</em> <span class="pub-badge badge-conf">IEEE Healthcom 2012</span><span class="pub-badge badge-award">🏆 Best Paper</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <p style="font-size:.85rem;color:var(--gray);margin-top:1.5rem">For the complete list of 81+ publications, visit <a href="https://scholar.google.com/citations?user=178VrZ0AAAAJ&hl=en" target="_blank" style="color:var(--accent)">Google Scholar</a> or <a href="https://dblp.org/pid/52/6838.html" target="_blank" style="color:var(--accent)">DBLP</a>.</p>
+    </div>
+  </section>
+</div>
+
+<footer>
+  &copy; 2026 ICARE Lab · Department of EECS · Syracuse University ·
+  <a href="https://farahman.github.io/">farahman.github.io</a>
+</footer>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function filterPubs(year, btn) {
+  document.querySelectorAll('.pub-filter button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.pub-year-group').forEach(g => {
+    g.style.display = (year === 'all' || g.dataset.year === year) ? 'block' : 'none';
+  });
+}
+</script>
+</body>
+</html>
