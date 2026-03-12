@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inclusion Triangle — Syracuse University EECS</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Georgia, 'Times New Roman', serif; background: #f9f7f4; color: #1a1a2e; }
+  
+  /* NAV */
+  nav { background: #1a1a2e; position: sticky; top: 0; z-index: 100; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 0; }
+  .nav-logo { padding: 14px 24px 14px 0; display: flex; align-items: center; gap: 10px; border-right: 1px solid rgba(255,255,255,0.15); margin-right: 8px; }
+  .nav-logo-su { width: 32px; height: 32px; background: #F76900; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: white; font-family: sans-serif; }
+  .nav-title { font-size: 15px; color: white; font-family: sans-serif; font-weight: 600; letter-spacing: 0.3px; }
+  nav a { color: rgba(255,255,255,0.82); text-decoration: none; font-family: sans-serif; font-size: 13.5px; padding: 18px 16px; display: block; transition: color 0.2s, background 0.2s; }
+  nav a:hover, nav a.active { color: #fff; background: rgba(255,255,255,0.08); }
+  .nav-links { display: flex; flex: 1; }
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 18px 20px; color: white; font-size: 20px; margin-left: auto; }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%); color: white; padding: 72px 24px 60px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -40px; right: -40px; width: 300px; height: 300px; border: 2px solid rgba(247,105,0,0.2); border-radius: 50%; }
+  .hero::after { content: ''; position: absolute; bottom: -80px; left: -60px; width: 400px; height: 400px; border: 2px solid rgba(247,105,0,0.1); border-radius: 50%; }
+  .triangle-icon { width: 64px; height: 56px; margin: 0 auto 20px; position: relative; }
+  .triangle-icon svg { width: 100%; height: 100%; }
+  .hero h1 { font-size: 38px; font-weight: normal; letter-spacing: -0.5px; margin-bottom: 12px; }
+  .hero h1 span { color: #F76900; }
+  .hero p.sub { font-family: sans-serif; font-size: 16px; color: rgba(255,255,255,0.75); max-width: 580px; margin: 0 auto 28px; line-height: 1.6; }
+  .badge { display: inline-block; background: rgba(247,105,0,0.2); border: 1px solid rgba(247,105,0,0.5); color: #ffb380; font-family: sans-serif; font-size: 12px; padding: 5px 14px; border-radius: 20px; letter-spacing: 0.5px; text-transform: uppercase; }
+
+  /* SECTIONS */
+  section { display: none; max-width: 1100px; margin: 0 auto; padding: 48px 24px 64px; }
+  section.active { display: block; }
+
+  h2.section-title { font-size: 28px; font-weight: normal; color: #1a1a2e; margin-bottom: 8px; }
+  p.section-sub { font-family: sans-serif; font-size: 15px; color: #555; margin-bottom: 36px; line-height: 1.6; border-left: 3px solid #F76900; padding-left: 14px; }
+
+  /* PILLAR CARDS */
+  .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px; margin-bottom: 48px; }
+  .pillar-card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #e8e5e0; transition: transform 0.2s, box-shadow 0.2s; }
+  .pillar-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+  .pillar-header { padding: 24px 24px 16px; }
+  .pillar-num { display: inline-block; width: 36px; height: 36px; border-radius: 50%; font-family: sans-serif; font-size: 16px; font-weight: bold; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .pillar-card h3 { font-size: 20px; font-weight: normal; margin-bottom: 8px; }
+  .pillar-card .desc { font-family: sans-serif; font-size: 14px; color: #666; line-height: 1.65; }
+  .pillar-body { padding: 0 24px 24px; }
+  .pillar-items { list-style: none; margin-top: 16px; }
+  .pillar-items li { font-family: sans-serif; font-size: 13.5px; color: #444; padding: 7px 0; border-bottom: 1px solid #f0ede8; display: flex; gap: 10px; align-items: flex-start; }
+  .pillar-items li:last-child { border-bottom: none; }
+  .pillar-items li::before { content: '→'; font-size: 13px; margin-top: 1px; flex-shrink: 0; }
+  .p1 .pillar-header { background: #fff8f3; border-bottom: 3px solid #F76900; }
+  .p1 .pillar-num { background: #ffe8d6; color: #c45200; }
+  .p1 .pillar-items li::before { color: #F76900; }
+  .p2 .pillar-header { background: #f3f6ff; border-bottom: 3px solid #2563eb; }
+  .p2 .pillar-num { background: #dbeafe; color: #1d4ed8; }
+  .p2 .pillar-items li::before { color: #2563eb; }
+  .p3 .pillar-header { background: #f3faf6; border-bottom: 3px solid #16a34a; }
+  .p3 .pillar-num { background: #dcfce7; color: #15803d; }
+  .p3 .pillar-items li::before { color: #16a34a; }
+
+  /* STUDENTS */
+  .students-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+  .student-card { background: white; border-radius: 12px; padding: 20px 16px; text-align: center; border: 1px solid #e8e5e0; }
+  .avatar { width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-family: sans-serif; font-size: 18px; font-weight: 600; color: white; }
+  .student-card h4 { font-family: sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .student-card p { font-family: sans-serif; font-size: 12px; color: #888; }
+  .student-card .role-tag { display: inline-block; margin-top: 8px; font-family: sans-serif; font-size: 11px; padding: 3px 10px; border-radius: 12px; }
+  .tag-mentor { background: #fff0e5; color: #c45200; }
+  .tag-research { background: #f0fdf4; color: #15803d; }
+  .tag-ta { background: #eff6ff; color: #1d4ed8; }
+  .cohort-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .stat-box { background: white; border: 1px solid #e8e5e0; border-radius: 10px; padding: 20px; text-align: center; }
+  .stat-box .num { font-size: 36px; color: #F76900; font-weight: normal; }
+  .stat-box .lbl { font-family: sans-serif; font-size: 13px; color: #666; margin-top: 4px; }
+
+  /* IMPACT */
+  .impact-timeline { position: relative; padding-left: 32px; margin-bottom: 48px; }
+  .impact-timeline::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: #e8e5e0; }
+  .timeline-item { position: relative; margin-bottom: 28px; }
+  .timeline-item::before { content: ''; position: absolute; left: -29px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: #F76900; border: 2px solid white; box-shadow: 0 0 0 2px #F76900; }
+  .timeline-item h4 { font-family: sans-serif; font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .timeline-item p { font-family: sans-serif; font-size: 14px; color: #555; line-height: 1.6; }
+  .impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 48px; }
+  .impact-card { background: white; border-radius: 12px; padding: 24px 20px; border: 1px solid #e8e5e0; border-top: 4px solid #F76900; }
+  .impact-card .big { font-size: 40px; color: #F76900; line-height: 1; margin-bottom: 8px; }
+  .impact-card p { font-family: sans-serif; font-size: 13.5px; color: #555; line-height: 1.5; }
+  .placement-list { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+  .placement-list li { font-family: sans-serif; font-size: 13px; background: white; border: 1px solid #e0ddd8; border-radius: 20px; padding: 6px 16px; color: #333; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  @media (max-width: 680px) { .about-grid { grid-template-columns: 1fr; } }
+  .about-box { background: white; border-radius: 12px; padding: 24px; border: 1px solid #e8e5e0; }
+  .about-box h3 { font-size: 18px; font-weight: normal; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #f0ede8; }
+  .about-box p, .about-box li { font-family: sans-serif; font-size: 14px; color: #555; line-height: 1.7; }
+  .about-box ul { padding-left: 18px; margin-top: 8px; }
+  .pi-card { background: #1a1a2e; color: white; border-radius: 12px; padding: 24px; }
+  .pi-card h3 { color: #F76900; font-size: 18px; font-weight: normal; margin-bottom: 4px; }
+  .pi-card .title { font-family: sans-serif; font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
+  .pi-card p { font-family: sans-serif; font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.7; }
+
+  /* PARTNERS */
+  .partners-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+  .partner-card { background: white; border-radius: 12px; padding: 20px; border: 1px solid #e8e5e0; text-align: center; }
+  .partner-icon { width: 48px; height: 48px; border-radius: 10px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-family: sans-serif; font-size: 11px; font-weight: bold; }
+  .partner-card h4 { font-family: sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .partner-card p { font-family: sans-serif; font-size: 12px; color: #888; line-height: 1.5; }
+  
+  /* FUNDING BANNER */
+  .funding-banner { background: #1a1a2e; color: white; padding: 36px 24px; text-align: center; }
+  .funding-banner p { font-family: sans-serif; font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 20px; }
+  .funder-logos { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; }
+  .funder-pill { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 40px; padding: 10px 20px; }
+  .funder-pill .dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: sans-serif; font-size: 11px; font-weight: bold; color: white; flex-shrink: 0; }
+  .funder-pill span { font-family: sans-serif; font-size: 13px; color: rgba(255,255,255,0.9); }
+  .google-g { background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335); }
+  .ecs-dot { background: #F76900; }
+
+  /* FOOTER */
+  footer { background: #111827; color: rgba(255,255,255,0.5); text-align: center; font-family: sans-serif; font-size: 12px; padding: 20px; }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; flex-direction: column; width: 100%; }
+    .nav-links.open { display: flex; }
+    .hamburger { display: block; }
+    .nav-inner { flex-wrap: wrap; }
+    nav a { padding: 14px 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .hero h1 { font-size: 28px; }
+    .about-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="nav-logo-su">SU</div>
+      <div class="nav-title">Inclusion Triangle</div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#" class="active" onclick="show('home',this)">Home</a>
+      <a href="#" onclick="show('members',this)">Members</a>
+      <a href="#" onclick="show('impact',this)">Impact</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="triangle-icon">
+    <svg viewBox="0 0 64 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="32,4 60,52 4,52" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+      <circle cx="32" cy="8" r="7" fill="#F76900"/>
+      <circle cx="56" cy="50" r="7" fill="#2563eb"/>
+      <circle cx="8" cy="50" r="7" fill="#16a34a"/>
+      <line x1="32" y1="14" x2="50" y2="44" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <line x1="32" y1="14" x2="14" y2="44" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <line x1="14" y1="50" x2="50" y2="50" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>
+    </svg>
+  </div>
+  <h1>The <span>Inclusion Triangle</span></h1>
+  <p class="sub">Cultivating Next Generation Computing Researchers through Teaching, Mentoring, and Undergraduate Research.</p>
+  <span class="badge">Funded by Google exploreCSR</span>
+</div>
+
+
+<!-- HOME -->
+<section id="home" class="active">
+  <h2 class="section-title">Welcome</h2>
+  <p class="section-sub">The Inclusion Triangle is a structured action framework designed to eliminate systemic barriers faced by underserved students in computing.</p>
+
+  <div class="cohort-stats">
+    <div class="stat-box"><div class="num">200+</div><div class="lbl">Students reached through RESORC</div></div>
+    <div class="stat-box"><div class="num">19</div><div class="lbl">Graduate school placements</div></div>
+    <div class="stat-box"><div class="num">25%</div><div class="lbl">Target increase in underserved student retention</div></div>
+    <div class="stat-box"><div class="num">4</div><div class="lbl">Years of exploreCSR experience</div></div>
+  </div>
+
+
+  <h2 class="section-title" style="margin-bottom:8px;">The Three Pillars</h2>
+  <p class="section-sub">Three mutually reinforcing interventions that together create a more equitable environment for historically marginalized students in computing.</p>
+
+  <div class="pillars-grid">
+    <div class="pillar-card p1">
+      <div class="pillar-header">
+        <div class="pillar-num">1</div>
+        <h3>Peer Mentorship</h3>
+        <p class="desc">Connecting students with near-peer mentors who understand their journey and can guide them through challenges in the computing and adjacent major programs.</p>
+      </div>
+      <div class="pillar-body">
+        <ul class="pillar-items">
+          <li>Students serve as near-peer mentors sharing career development strategies&nbsp;</li>
+          <li>Credit-bearing course in peer mentoring to incentivize participation</li>
+          <li>Centralized platform hosting mentoring resources and soft-skill development tutorials</li>
+          <li>Discord and mailing lists for ongoing community and collaboration</li>
+          <li>Graduate students serve as role models sharing research and grad school insights</li>
+          <li>Near peer mentor's engagement and networking worshop&nbsp;</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pillar-card p2">
+      <div class="pillar-header">
+        <div class="pillar-num">2</div>
+        <h3>Inclusive TA Training</h3>
+        <p class="desc">Training TAs, tutors, and faculties in evidence based inclusive teaching and mentoring practices to create supportive learning environments for all students.</p>
+      </div>
+      <div class="pillar-body">
+        <ul class="pillar-items">
+          <li>Self-paced online training integrated into mandatory TA orientation</li>
+          <li>Modules on cultural competency and bias-aware course delivery</li>
+          <li>Training TAs on best practices of&nbsp;AI tool usage during instructional support&nbsp;</li>
+          <li>Attendance in professional development for academic career preparation&nbsp; &nbsp;&nbsp;</li>
+          <li>Reusable video-based training materials for long-term sustainability</li>
+          <li>Evaluation tied to improvements in student student course performance</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pillar-card p3">
+      <div class="pillar-header">
+        <div class="pillar-num">3</div>
+        <h3>Accessible Research</h3>
+        <p class="desc">Opening doors to undergraduate research through structured research method courses, summer research programs, and research career preparation.</p>
+      </div>
+      <div class="pillar-body">
+        <ul class="pillar-items">
+          <li>Semester-long undergraduate research methods course</li>
+          <li>Team-based summer research on socially responsible computing</li>
+          <li>Research identity workshops using Social Cognitive Career Theory</li>
+          <li>Peer-Assisted Team Research (PATR) model for collaborative projects</li>
+          <li>Networking events with national experts and industry professionals</li>
+          <li>Application prep for REU, PhD programs, NSF GRFP, GHC, and more</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERS -->
+<section id="members">
+  <h2 class="section-title">Members</h2>
+  <p class="section-sub">The Inclusion Triangle consists of faculty, TAs, peer-mentors, all focused on cultivating sense of beloning in undergraduate students and ensuring inclusive learning experinces for all. </p>
+  <div class="cohort-stats">
+    <div class="stat-box"><div class="num">40</div><div class="lbl">Mentees per year</div></div>
+    <div class="stat-box"><div class="num">8</div><div class="lbl">Peer mentors per year</div></div>
+    <div class="stat-box"><div class="num">6-10</div><div class="lbl">TAs trained per year</div></div>
+    <div class="stat-box"><div class="num">19</div><div class="lbl">Graduate school placements</div></div>
+  </div>
+  
+  <div class="students-grid">
+    <div class="student-card">
+      <div class="avatar" style="background:#F76900;">DH</div>
+      <h4>Daniel Han</h4>
+      <!--<p>Junior, CS — First-gen student</p>-->
+      <!--<span class="role-tag tag-mentor">Mentee</span>-->
+    </div>
+    <div class="student-card">
+      <div class="avatar" style="background:#2563eb;">SL</div>
+      <h4>Sandy Lin</h4>
+    </div>
+	  
+    <div class="student-card">
+      <div class="avatar" style="background:#16a34a;">JL</div>
+      <h4>Joshua Lim</h4>
+    </div>
+	  
+    <div class="student-card">
+      <div class="avatar" style="background:#9333ea;">LD</div>
+      <h4>Lucy DiSalvo</h4>
+    </div>
+	  
+	<div class="student-card">
+      <div class="avatar" style="background:#9333ea;">AT</div>
+      <h4>Alan Tom</h4>
+    </div> 
+	  
+    <div class="student-card">
+      <div class="avatar" style="background:#9333ea;">TS</div>
+      <h4>Tamar Shuster</h4>
+    </div>   
+	  
+	<div class="student-card">
+      <div class="avatar" style="background:#9333ea;">KV</div>
+      <h4>Kritika Verma</h4>
+    </div>
+	  
+	  
+	<div class="student-card">
+      <div class="avatar" style="background:#9333ea;">WT</div>
+      <h4>Winston Tsui</h4>
+    </div>
+	  
+	  
+     <div class="student-card">
+      <div class="avatar" style="background:#9333ea;">JM</div>
+      <h4>Jemma Malia</h4>
+    </div>
+	  
+    <div class="student-card">
+      <div class="avatar" style="background:#0891b2;">NG</div>
+      <h4>Natarajan Gautam</h4>
+      <p>EECS</p>
+      <span class="role-tag tag-mentor">Faculty Mentor</span>
+    </div>
+	  
+	  
+	 <div class="student-card">
+      <div class="avatar" style="background:#c45200;">YT</div>
+      <h4>Yuzhe Tang</h4>
+      <p>EECS</p>
+      <span class="role-tag tag-mentor">Faculty Mentor</span>
+    </div>  
+	  
+	<div class="student-card">
+      <div class="avatar" style="background:#c45200;">YT</div>
+      <h4>Yuzhe Tang</h4>
+      <p>EECS</p>
+      <span class="role-tag tag-mentor">Faculty Mentor</span>
+    </div> 
+	  
+	  
+    <div class="student-card">
+      <div class="avatar" style="background:#c45200;">BK</div>
+      <h4>Bryan Kim</h4>
+      <p>EECS</p>
+      <span class="role-tag tag-mentor">Faculty Mentor</span>
+    </div>
+	  
+	  
+    <div class="student-card">
+      <div class="avatar" style="background:#c45200;">SD</div>
+      <h4>Shreya Deexit</h4>
+      <span class="role-tag tag-research">TA Training</span>
+    </div>   
+	  
+	 <div class="student-card">
+      <div class="avatar" style="background:#c45200;">AH</div>
+      <h4>Ashley Marie Hamilton</h4>
+      <span class="role-tag tag-research">Peer Mentor</span>
+    </div> 
+	  
+	 <div class="student-card">
+      <div class="avatar" style="background:#c45200;">ND</div>
+      <h4>Nocholas Davis</h4>
+      <span class="role-tag tag-research">Peer Mentor</span>
+    </div> 
+	  
+	 <div class="student-card">
+      <div class="avatar" style="background:#c45200;">AN</div>
+      <h4>Arianna Kassandra Nguyen</h4>
+      <span class="role-tag tag-research">Peer Mentor</span>
+    </div> 
+	  
+	<div class="student-card">
+      <div class="avatar" style="background:#c45200;">GB</div>
+      <h4>Giovanna Elizabeth Barsalona</h4>
+      <span class="role-tag tag-research">Peer Mentor</span>
+    </div> 
+	  
+	<div class="student-card">
+      <div class="avatar" style="background:#c45200;">CV</div>
+      <h4>Chris Vinciguerra</h4>
+      <span class="role-tag tag-research">Peer Mentor</span>
+    </div> 
+	  
+	<div class="student-card">
+      <div class="avatar" style="background:#c45200;">RA</div>
+      <h4>Reyhaneh Abdolazimi</h4>
+      <span class="role-tag tag-research">TA Training</span>
+    </div> 
+	  
+	<div class="student-card">
+      <div class="avatar" style="background:#c45200;">NU</div>
+      <h4>Nathalie Uwamahoro</h4>
+      <span class="role-tag tag-research">TA Training</span>
+    </div> 
+	
+	 <div class="student-card">
+      <div class="avatar" style="background:#c45200;">ZJ</div>
+      <h4>Ziyang Jiao</h4>
+      <span class="role-tag tag-research">TA Training</span>
+    </div> 
+	  
+	<div class="student-card">
+      <div class="avatar" style="background:#c45200;">ML</div>
+      <h4>Mengyu Liu</h4>
+      <span class="role-tag tag-research">TA Training</span>
+    </div> 
+	  
+  </div>
+
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <h2 class="section-title">Impact</h2>
+  <p class="section-sub">Since 2021, our work under the exploreCSR award has steadily expanded our reach, culminating in the Inclusion Triangle as a transformative, department-wide initiative.</p>
+  <div class="impact-grid">
+    <div class="impact-card"><div class="big">200+</div><p>Undergraduates reached through RESORC since 2021</p></div>
+    <div class="impact-card"><div class="big">118</div><p>Students places in summer undergraduate research programs</p></div>
+    <div class="impact-card"><div class="big">19</div><p>Students placed in top MS and PhD programs nationwide</p></div>
+    <div class="impact-card"><div class="big">25%</div><p>Target increase in underserved student retention</p></div>
+  </div>
+  <h3 style="font-size:18px; font-weight:normal; margin-bottom:20px;">Program Timeline</h3>
+  <div class="impact-timeline">
+    <div class="timeline-item">
+      <h4>2021 — RESORC launches</h4>
+      <p>First exploreCSR cohort launches RESORC (Research Exposure in Socially Relevant Computing). Nearly 300 applicants exceed expectations in year one.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>2022–2023 — Expansion1</h4>
+      <p>Program matures, undergraduate research participation grows from 3% to 11%. Graduate school pipeline begins producing results.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>2024 — Expansion2</h4>
+      <p>RESORC expanded as a year long immersive program. 14 MS and 4 PhD placements at top institutions including Berkeley, Columbia, and Cornell.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>2024–Present — Inclusion Triangle initiative</h4>
+      <p>New Google exploreCSR award launches the three-pillar Inclusion Triangle, embedding inclusive teaching and research into the fabric of the EECS department's policies and culture.</p>
+    </div>
+    <div class="timeline-item">
+      <h4>3-Year goal — Systemic change</h4>
+      <p>Increased student persistence. Faculty professional developmnent. Mandatory TA training. Credit-bearing research for undergrduates. Mentoring courses fully institutionalized.</p>
+    </div>
+  </div>
+</section>
+	
+	
+	
+<!--FOOTER-->		
+<div class="funding-banner" id="funding">
+  <p>The Inclusion Triangle is made possible through the generous support of:</p>
+  <div class="funder-logos">
+    <div class="funder-pill">
+      <div class="dot google-g" style="background: #4285F4; font-size:14px; font-weight:900;">G</div>
+      <span>Google exploreCSR Award</span>
+    </div>
+    <div class="funder-pill">
+      <div class="dot ecs-dot">ECS</div>
+      <span>College of Engineering and Computer Science</span>
+    </div>
+    <div class="funder-pill">
+      <div class="dot" style="background:#6b7280;">SU</div>
+      <span>Syracuse University</span>
+    </div>
+  </div>
+  <p style="margin-top:20px; font-size:13px;">We are deeply grateful to Google for funding this initiative through the exploreCSR program,<br>
+  and to Syracuse University for its institutional commitment to ensure inclusive computing education.</p>
+</div>
+
+<footer>
+&copy; 2024 Inclusion Triangle · Syracuse University, ECS,&nbsp; EECS · Funded by Google exploreCSR</footer>
+
+<script>
+  function show(id, el) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.innerWidth <= 600) {
+      document.getElementById('navLinks').classList.remove('open');
+    }
+    return false;
+  }
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+</script>
+</body>
+</html>
