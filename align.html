@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALIGN Framework</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, 'Times New Roman', serif; background: #f8f7f4; color: #2c2c2a; line-height: 1.7; }
+  a { color: #185fa5; }
+
+  /* Hero */
+  .hero { background: #1d1c1a; color: #f8f7f4; padding: 72px 24px 64px; text-align: center; }
+  .hero-tag { display: inline-block; background: #534ab7; color: #eeedfe; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 24px; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .hero h1 span { color: #9fe1cb; }
+  .hero-sub { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 1.1rem; color: #b4b2a9; max-width: 640px; margin: 0 auto 36px; line-height: 1.6; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .pill { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #d3d1c7; padding: 6px 16px; border-radius: 20px; }
+
+  /* Layout */
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 72px 0 56px; }
+  .section + .section { border-top: 1px solid #d3d1c7; }
+  .section-label { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #0f6e56; margin-bottom: 10px; }
+  .section-title { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: #1d1c1a; margin-bottom: 16px; letter-spacing: -0.01em; }
+  .section-body { font-size: 1rem; color: #444441; max-width: 720px; line-height: 1.8; margin-bottom: 36px; }
+
+  /* Stat cards */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 48px; }
+  .stat-card { background: #fff; border: 1px solid #d3d1c7; border-radius: 12px; padding: 20px 18px; }
+  .stat-num { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 2rem; font-weight: 700; color: #534ab7; line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 12px; color: #888780; line-height: 1.4; }
+
+  /* Goal cards */
+  .goal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .goal-card { background: #fff; border: 1px solid #d3d1c7; border-radius: 12px; padding: 22px 20px; }
+  .goal-icon { width: 36px; height: 36px; border-radius: 8px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; }
+  .goal-card h3 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 600; color: #1d1c1a; margin-bottom: 8px; line-height: 1.4; }
+  .goal-card p { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: #5f5e5a; line-height: 1.6; }
+  .ic-purple { background: #eeedfe; }
+  .ic-teal   { background: #e1f5ee; }
+  .ic-coral  { background: #faece7; }
+  .ic-blue   { background: #e6f1fb; }
+  .ic-amber  { background: #faeeda; }
+
+  /* Framework steps */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .step { background: #fff; border: 1px solid #d3d1c7; border-radius: 12px; padding: 24px 20px; position: relative; }
+  .step-num { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #888780; margin-bottom: 8px; }
+  .step-title { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 15px; font-weight: 600; color: #1d1c1a; margin-bottom: 10px; line-height: 1.4; }
+  .step-desc { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: #5f5e5a; line-height: 1.6; }
+  .step-bar { height: 3px; border-radius: 2px; margin-bottom: 20px; }
+  .bar1 { background: #534ab7; }
+  .bar2 { background: #1d9e75; }
+  .bar3 { background: #d85a30; }
+  .bar4 { background: #378add; }
+
+  /* Instructional model visual */
+  .model-visual { background: #fff; border: 1px solid #d3d1c7; border-radius: 16px; overflow: hidden; margin-bottom: 48px; }
+  .model-header { background: #1d1c1a; color: #f8f7f4; padding: 20px 28px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.01em; }
+  .model-row { display: flex; align-items: stretch; border-bottom: 1px solid #ece9e3; }
+  .model-row:last-child { border-bottom: none; }
+  .model-key { flex: 0 0 200px; background: #f8f7f4; padding: 18px 20px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; font-weight: 600; color: #2c2c2a; border-right: 1px solid #d3d1c7; display: flex; align-items: center; }
+  .model-val { flex: 1; padding: 18px 22px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: #444441; line-height: 1.6; display: flex; align-items: center; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 12px; flex-shrink: 0; }
+  .d1 { background: #534ab7; }
+  .d2 { background: #1d9e75; }
+  .d3 { background: #d85a30; }
+  .d4 { background: #378add; }
+  .d5 { background: #ba7517; }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; margin-bottom: 48px; border-radius: 12px; border: 1px solid #d3d1c7; }
+  table { width: 100%; border-collapse: collapse; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; }
+  thead { background: #2c2c2a; color: #f8f7f4; }
+  thead th { padding: 13px 16px; text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.04em; white-space: nowrap; }
+  tbody tr { border-bottom: 1px solid #ece9e3; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:nth-child(even) { background: #faf9f7; }
+  tbody td { padding: 14px 16px; color: #2c2c2a; vertical-align: top; line-height: 1.55; }
+  tbody td:first-child { font-weight: 500; color: #1d1c1a; }
+  .col-action { width: 28%; }
+  .col-what   { width: 38%; }
+  .col-out    { width: 34%; }
+  .badge { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 10px; margin-left: 8px; vertical-align: middle; }
+  .b-purple { background: #eeedfe; color: #3c3489; }
+  .b-teal   { background: #e1f5ee; color: #085041; }
+  .b-coral  { background: #faece7; color: #712b13; }
+  .b-blue   { background: #e6f1fb; color: #0c447c; }
+
+  /* Impact section */
+  .impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .impact-card { background: #fff; border: 1px solid #d3d1c7; border-radius: 12px; padding: 22px 20px; border-left: 3px solid #534ab7; }
+  .impact-card p { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; color: #444441; line-height: 1.65; }
+
+  /* Footer */
+  footer { background: #1d1c1a; color: #888780; text-align: center; padding: 36px 24px; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; line-height: 1.7; }
+  footer strong { color: #d3d1c7; }
+
+  .section-divider { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  .divider-num { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 48px; font-weight: 700; color: #ece9e3; line-height: 1; }
+  .divider-text h2 { font-size: 1.4rem; font-weight: 700; color: #1d1c1a; margin-bottom: 4px; }
+  .divider-text p { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: #888780; }
+
+  svg-icon { display: inline-block; }
+
+  @media (max-width: 600px) {
+    .model-key { flex: 0 0 130px; font-size: 12px; }
+    .hero h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Research-Grounded Framework</div>
+  <h1><span>ALIGN</span></h1>
+  <h2 style="color: darkorange;">AI Literacy, Instructional Guidance, and Norms<br></h2>
+  <!--<h3>Training TAs in Responsible GenAI Use</h3>-->
+  <p class="hero-sub">A practical framework for training teaching assistants on responsible GenAI use in undergraduate computing and engineering education.</p>
+  <div class="hero-pills">
+    <span class="pill">AI Literacy</span>
+    <span class="pill">Instructional Guidance</span>
+    <span class="pill">Academic Integrity</span>
+    <span class="pill">Workforce Readiness</span>
+    <span class="pill">Scalable TA Development</span>
+  </div>
+</div>
+
+<!-- INTRODUCTION -->
+<div class="container">
+  <div class="section">
+    <div class="section-label">Why This Matters</div>
+	<h2 class="section-title"> Introduction</h2>
+	<p>Introduction: As generative AI becomes increasingly embedded in computing practice, undergraduate computing and engineering education must teach students not only how to use AI, but how to use it appropriately, critically, and responsibly. In this context, graduate and undergraduate teaching assistants are especially important because they shape students’ day-to-day practices in labs, office hours, and peer-support settings, where norms around debugging, problem solving, design reasoning, and academic integrity are often formed. Recent work suggests that students already experience tension in their use of AI: while many value these tools for explanation, feedback, and efficiency, they also question whether AI may reduce genuine engagement with learning. For this reason, TA training on responsible AI use is an important pedagogical intervention rather than an optional add-on. Well-prepared TAs can help students use AI to support learning—for example, by generating hints, comparing approaches, or suggesting test cases—while reinforcing the need to verify outputs, recognize limitations, and justify their own reasoning. Our prior work in large computing courses similarly suggests that AI can support debugging and code review productively when it is framed as a tool for reflection and inquiry, not as a shortcut to solutions. </p>
+	  
+	  <p>To respond to this need, we introduce <strong>ALIGN (AI Literacy, Instructional Guidance, and Norms)</strong>, a practical framework for preparing graduate and undergraduate teaching assistants to engage generative AI in ways that are pedagogically sound, critically informed, and aligned with disciplinary learning goals in undergraduate computing and engineering education. Rather than treating AI as either a shortcut to prohibit or a tool to adopt uncritically, ALIGN positions it as a support for inquiry, explanation, verification, and reflection while preserving productive struggle, human judgment, and academic integrity. Institutions can use ALIGN as a scalable roadmap for TA development, faculty-TA alignment, and continuous improvement by combining short training modules, authentic instructional scenarios, shared guidance on acceptable use, and lightweight evidence collection. In this way, the framework helps departments move toward a more critical, consistent, and student-centered model of AI-supported education. </p>
+	  
+	  <p>Such training is also important for workforce preparation. As future software engineers and scientists enter professional settings where AI is increasingly integrated into everyday practice, they must learn habits of verification, critical evaluation, and responsible use. Training TAs to model these practices helps strengthen student learning in the present while cultivating the professional judgment needed for an AI-shaped future. </p>
+
+	
+    <h2 class="section-title">The case for   TA training in responsible AI use&nbsp; &nbsp;</h2>
+    <p>Generative AI is already present in office hours, peer-learning sessions, and debugging workflows. Institutions need TA preparation models that preserve learning, strengthen instructional consistency, and teach appropriate disciplinary use — rather than simply banning or normalizing AI use. ALIGN positions AI as a support for inquiry, explanation, verification, and reflection while preserving productive struggle, human judgment, and academic integrity.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Core training modules covering all dimensions of responsible use</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">15–20</div>
+        <div class="stat-label">Minutes per module — scalable microlearning format</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Authentic instructional contexts from real student support settings</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Stakeholder groups aligned: instructors, TAs, and students</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRAINING GOALS -->
+<div style="background: #f0ede8; padding: 64px 0;">
+  <div class="container">
+    <div class="section-label">Training Goals</div>
+    <h2 class="section-title">What TAs learn to do</h2>
+    <div class="goal-grid">
+      <div class="goal-card">
+        <div class="goal-icon ic-purple">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#534ab7" stroke-width="1.5"/><path d="M6 9h6M9 6v6" stroke="#534ab7" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Frame AI as a reasoning aid</h3>
+        <p>Use GenAI to prompt explanation, debugging hypotheses, comparison of alternatives, and design trade-off reflection — not as an answer engine.</p>
+      </div>
+      <div class="goal-card">
+        <div class="goal-icon ic-teal">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 14V7l5-4 5 4v7" stroke="#0f6e56" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="10" width="4" height="4" rx="1" stroke="#0f6e56" stroke-width="1.5"/></svg>
+        </div>
+        <h3>Preserve productive struggle</h3>
+        <p>Students articulate the problem, predict causes, write test cases, or explain their own code before consulting any AI output.</p>
+      </div>
+      <div class="goal-card">
+        <div class="goal-icon ic-coral">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 9l3 3 5-5" stroke="#993c1d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="9" r="7" stroke="#993c1d" stroke-width="1.5"/></svg>
+        </div>
+        <h3>Teach verification explicitly</h3>
+        <p>Challenge hallucinations, incomplete explanations, and polished-but-incorrect solutions, modeling how disciplinary judgment operates in real time.</p>
+      </div>
+      <div class="goal-card">
+        <div class="goal-icon ic-blue">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="12" height="12" rx="2" stroke="#185fa5" stroke-width="1.5"/><path d="M3 7h12" stroke="#185fa5" stroke-width="1.5"/><path d="M7 7v8" stroke="#185fa5" stroke-width="1.5"/></svg>
+        </div>
+        <h3>Center contextual appropriateness</h3>
+        <p>The same tool may be legitimate for documentation review or conceptual explanation, but inappropriate when it bypasses the core intellectual work of a task.</p>
+      </div>
+      <div class="goal-card">
+        <div class="goal-icon ic-amber">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="7" r="3" stroke="#854f0b" stroke-width="1.5"/><path d="M4 15c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="#854f0b" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Align with inclusive teaching</h3>
+        <p>Address confidence-building feedback and welcoming learning climates. Recognize how AI can either widen or reduce equity depending on how it is introduced.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FRAMEWORK DIAGRAM IMAGE -->
+<div style="background: #f8f7f4; padding: 56px 0 0;">
+  <div class="container">
+    <div class="section-label">Framework Overview</div>
+    <h2 class="section-title">The ALIGN model at a glance</h2>
+    <p class="section-body">The diagram below illustrates the full ALIGN pipeline — from TA micro-modules through authentic scenarios, faculty alignment, and evidence cycles, culminating in scalable institutional adoption.</p>
+    <div style="text-align: center; margin-bottom: 0;">
+      <img src="https://farahman.github.io/img/ALIGN-Image.png" alt="ALIGN framework diagram" id="align-diagram"
+        style="max-width: 480px; width: 100%; border-radius: 16px; border: 1px solid #d3d1c7; box-shadow: none; display: block; margin: 0 auto;" />
+    </div>
+  </div>
+</div>
+
+<!-- INSTRUCTIONAL MODEL -->
+<div class="container">
+  <div class="section">
+    <div class="section-label">Instructional Model</div>
+    <h2 class="section-title">What the model looks like in practice</h2>
+    <p class="section-body">The framework maps key student support needs to concrete TA responses that center learning rather than shortcutting it.</p>
+    <div class="model-visual">
+      <div class="model-header">Support context → TA instructional response</div>
+      <div class="model-row">
+        <div class="model-key"><span class="dot d1"></span>Debugging support</div>
+        <div class="model-val">TAs ask students to describe the bug first, then use AI to surface possible causes and evaluate which explanation best fits the code and the error trace.</div>
+      </div>
+      <div class="model-row">
+        <div class="model-key"><span class="dot d2"></span>Code explanation</div>
+        <div class="model-val">Students compare their own understanding with AI-generated explanations, then critique what is accurate, missing, or misleading.</div>
+      </div>
+      <div class="model-row">
+        <div class="model-key"><span class="dot d3"></span>Documentation & clarity</div>
+        <div class="model-val">AI is used to compare alternative documentation or pseudocode so students can revise for completeness, readability, and precision.</div>
+      </div>
+      <div class="model-row">
+        <div class="model-key"><span class="dot d4"></span>Testing & edge cases</div>
+        <div class="model-val">Students write their own tests before asking AI for additional scenarios, using the tool to deepen — not outsource — test-driven thinking.</div>
+      </div>
+      <div class="model-row">
+        <div class="model-key"><span class="dot d5"></span>Reflection & transfer</div>
+        <div class="model-val">After the interaction, TAs prompt students to explain what they learned, when they would trust or reject the AI output, and how they would solve a similar problem without the tool.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FRAMEWORK — 4 STEPS -->
+<div style="background: #f0ede8; padding: 64px 0 72px;">
+  <div class="container">
+    <div class="section-label">The ALIGN Framework</div>
+    <h2 class="section-title">Four-component training roadmap</h2>
+    <div class="steps">
+      <div class="step"><div class="step-bar bar1"></div><div class="step-num">Step 01</div><div class="step-title">Modular GenAI Training</div><div class="step-desc">Short self-paced modules on appropriate use cases, prompting practices, verification strategies, and reflection prompts tied to course learning goals.</div></div>
+      <div class="step"><div class="step-bar bar2"></div><div class="step-num">Step 02</div><div class="step-title">Scenario-Based Learning</div><div class="step-desc">Authentic instructional scenarios from debugging, design comparison, testing, and code explanation contexts — disciplinary, not generic.</div></div>
+      <div class="step"><div class="step-bar bar3"></div><div class="step-num">Step 03</div><div class="step-title">Faculty-TA Alignment</div><div class="step-desc">Pair TA training with faculty guidance so instructors and assistants send consistent messages about acceptable use, disclosure, and prohibited contexts.</div></div>
+      <div class="step"><div class="step-bar bar4"></div><div class="step-num">Step 04</div><div class="step-title">Continuous Improvement</div><div class="step-desc">Collect lightweight evidence — TA reflections, student feedback, office-hour observations, and error patterns — to improve the model each term.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE TABLE -->
+<div class="container">
+  <div class="section">
+    <div class="section-divider">
+      <div class="divider-num">01</div>
+      <div class="divider-text"><h2>TA Training Modules</h2><p>GenAI use cases, prompting, verification, and reflection</p></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-action">Action item</th>
+            <th class="col-what">What departments / institutions do</th>
+            <th class="col-out">Intended outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Define module sequence</td><td>Organize 4 short modules: appropriate use cases, prompting, verification, and reflection</td><td>Creates a coherent, repeatable TA training pathway</td></tr>
+          <tr><td>Align each module to course goals</td><td>Tie modules to outcomes such as debugging skill, conceptual understanding, or ethical AI use</td><td>Keeps training pedagogically grounded rather than tool-centered</td></tr>
+          <tr><td>Use microlearning format</td><td>Design 15–20 min self-paced modules with examples, quizzes, and short reflections</td><td>Makes adoption scalable and feasible across multiple courses</td></tr>
+          <tr><td>Include disciplinary examples</td><td>Use examples from CS help sessions, labs, grading, and office hours</td><td>Improves relevance and TA buy-in</td></tr>
+          <tr><td>Teach prompt design</td><td>Show TAs how to prompt for hints, misconceptions, test cases, and alternative explanations instead of answers</td><td>Encourages learning-supportive uses of GenAI</td></tr>
+          <tr><td>Require verification steps</td><td>Train TAs to check correctness, course alignment, accessibility, bias, and pedagogical fit</td><td>Reduces inaccurate or harmful AI-supported guidance</td></tr>
+          <tr><td>Add reflection prompts</td><td>Ask TAs to explain why and when AI use supports learning goals</td><td>Builds metacognition and accountable instructional practice</td></tr>
+          <tr><td>Build in knowledge checks</td><td>Use short quizzes or scenario responses after each module</td><td>Confirms baseline competency before classroom use</td></tr>
+          <tr><td>Refresh each semester</td><td>Update examples, policy references, and emerging risks</td><td>Keeps training current as tools and practices evolve</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SCENARIO TABLE -->
+    <div class="section-divider" style="margin-top: 48px;">
+      <div class="divider-num">02</div>
+      <div class="divider-text"><h2>Scenario-Based Training</h2><p>Authentic student support contexts</p></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-action">Action item</th>
+            <th class="col-what">What departments / institutions do</th>
+            <th class="col-out">Intended outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Identify common TA support contexts</td><td>Gather recurring contexts: debugging, design comparisons, testing, code explanation, office-hour support</td><td>Ensures training reflects real instructional practice</td></tr>
+          <tr><td>Build case-based scenarios</td><td>Create realistic examples with student questions, assignment context, and AI use dilemmas</td><td>Helps TAs rehearse judgment in authentic settings</td></tr>
+          <tr><td>Include acceptable vs. unacceptable uses</td><td>Show when AI can scaffold learning and when it would bypass intended struggle</td><td>Clarifies boundaries for responsible use</td></tr>
+          <tr><td>Add model prompts and responses</td><td>Provide sample AI prompts, critique of outputs, and model TA follow-up</td><td>Translates abstract policy into practice</td></tr>
+          <tr><td>Include risk flags</td><td>Mark cases involving hallucinations, over-scaffolding, bias, accessibility gaps, or policy violations</td><td>Prepares TAs to identify and mitigate risks</td></tr>
+          <tr><td>Use course-specific language</td><td>Adapt cases to programming paradigms, software engineering, data science, or systems work</td><td>Makes training disciplinary rather than generic</td></tr>
+          <tr><td>Practice discussion and calibration</td><td>Review scenarios in TA meetings or faculty-TA workshops</td><td>Builds consistency across instructional staff</td></tr>
+          <tr><td>Revise scenarios using field evidence</td><td>Update cases based on student questions, office-hour logs, or assignment trouble spots</td><td>Keeps training responsive to actual need</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ALIGNMENT TABLE -->
+    <div class="section-divider" style="margin-top: 48px;">
+      <div class="divider-num">03</div>
+      <div class="divider-text"><h2>Faculty–TA Alignment</h2><p>Consistent messaging on acceptable use</p></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-action">Action item</th>
+            <th class="col-what">What departments / institutions do</th>
+            <th class="col-out">Intended outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Create a faculty AI guidance template</td><td>Ask instructors to define acceptable uses, restricted uses, disclosure expectations, and prohibited uses</td><td>Establishes course-specific clarity</td></tr>
+          <tr><td>Review guidance with TAs before the term</td><td>Integrate faculty expectations into TA onboarding and training</td><td>Aligns faculty and TA messaging from the start</td></tr>
+          <tr><td>Develop shared terminology</td><td>Standardize terms: brainstorming, assistance, revision, attribution, and prohibited automation</td><td>Reduces ambiguity for both staff and students</td></tr>
+          <tr><td>Use joint calibration meetings</td><td>Discuss sample cases before and during the semester</td><td>Improves consistency across sections and support channels</td></tr>
+          <tr><td>Provide quick-reference guides</td><td>Create one-page decision aids for office hours, labs, and grading</td><td>Supports in-the-moment instructional decision-making</td></tr>
+          <tr><td>Clarify disclosure expectations</td><td>Define when students and TAs should acknowledge AI use</td><td>Encourages transparency and trust</td></tr>
+          <tr><td>Define "do not use AI" zones</td><td>Specify contexts where AI undermines the purpose of the task or assessment</td><td>Protects learning goals and academic integrity</td></tr>
+          <tr><td>Establish escalation pathways</td><td>Identify when TAs should refer questions to instructors or program leads</td><td>Prevents inconsistent or high-risk responses</td></tr>
+          <tr><td>Revisit policy mid-semester</td><td>Adjust guidance based on emerging issues or new assignments</td><td>Keeps policy implementation adaptive</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- EVIDENCE TABLE -->
+    <div class="section-divider" style="margin-top: 48px;">
+      <div class="divider-num">04</div>
+      <div class="divider-text"><h2>Continuous Improvement</h2><p>Lightweight evidence collection</p></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-action">Action item</th>
+            <th class="col-what">What departments / institutions do</th>
+            <th class="col-out">Intended outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Collect TA reflections</td><td>Ask TAs to complete short pre/post reflections on expected and actual AI use</td><td>Surfaces instructional reasoning and uncertainty</td></tr>
+          <tr><td>Gather student feedback</td><td>Add a few survey questions on clarity, fairness, and usefulness of AI-related support</td><td>Captures student experience without major burden</td></tr>
+          <tr><td>Observe help-hour interactions</td><td>Use brief observation notes or debriefs from labs and office hours</td><td>Identifies how policies and practices play out in context</td></tr>
+          <tr><td>Review recurring support issues</td><td>Track common errors, repeated misconceptions, or frequent AI-related questions</td><td>Shows where training may need revision</td></tr>
+          <tr><td>Monitor consistency across sections</td><td>Compare how different TAs respond to similar situations</td><td>Helps detect uneven implementation</td></tr>
+          <tr><td>Use end-of-term review meetings</td><td>Bring faculty, TAs, and coordinators together to discuss patterns</td><td>Turns evidence into improvement decisions</td></tr>
+          <tr><td>Revise modules and scenarios</td><td>Update prompts, examples, and policy language based on evidence</td><td>Keeps the model responsive and useful</td></tr>
+          <tr><td>Document lessons learned</td><td>Maintain a living record of what worked, what confused TAs, and what students needed</td><td>Supports long-term institutional learning</td></tr>
+          <tr><td>Share findings across departments</td><td>Disseminate key takeaways for broader adoption</td><td>Enables scaling beyond one course or unit</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- COMMUNITY IMPACT -->
+<div style="background: #1d1c1a; padding: 72px 0;">
+  <div class="container">
+    <div class="section-label" style="color: #5dcaa5;">Broader Impact</div>
+    <h2 class="section-title" style="color: #f8f7f4; margin-bottom: 32px;">Why this framework matters for the community</h2>
+    <div class="impact-grid">
+      <div class="impact-card" style="background: #2c2c2a; border-color: #444441; border-left-color: #534ab7;">
+        <p style="color: #b4b2a9;">Provides a <strong style="color: #d3d1c7;">concrete roadmap</strong> for institutions that need AI guidance for TAs now, especially in high-enrollment computing courses where help-session practices are often inconsistent.</p>
+      </div>
+      <div class="impact-card" style="background: #2c2c2a; border-color: #444441; border-left-color: #1d9e75;">
+        <p style="color: #b4b2a9;">Moves beyond binary "allow vs. ban" policies by identifying <strong style="color: #d3d1c7;">trainable behaviors</strong>: prompting, verification, reflection, documentation critique, and explanation-centered support.</p>
+      </div>
+      <div class="impact-card" style="background: #2c2c2a; border-color: #444441; border-left-color: #d85a30;">
+        <p style="color: #b4b2a9;">Offers a <strong style="color: #d3d1c7;">scalable faculty-development asset</strong>. Self-paced modules prepare new TAs quickly while maintaining shared expectations across multiple sections and semesters.</p>
+      </div>
+      <div class="impact-card" style="background: #2c2c2a; border-color: #444441; border-left-color: #378add;">
+        <p style="color: #b4b2a9;">Models how AI policy can be <strong style="color: #d3d1c7;">operationalized at the instructional-support level</strong>, where students receive the most informal and consequential guidance about legitimate help.</p>
+      </div>
+      <div class="impact-card" style="background: #2c2c2a; border-color: #444441; border-left-color: #ba7517;">
+        <p style="color: #b4b2a9;">Contributes to a <strong style="color: #d3d1c7;">more inclusive learning environment</strong> by preparing TAs to use AI as a scaffolding tool while avoiding dependence, intimidation, or inequitable access to support.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>ALIGN</strong> — AI Literacy, Instructional Guidance, and Norms<br>
+  A framework for responsible GenAI use in computing and engineering education<br>
+  <span style="font-size: 12px; margin-top: 8px; display: block;">Adaptable into institutional TA orientations, faculty-led workshop series, departmental AI guidance, and peer-learning facilitator training.</span>
+</footer>
+
+</body>
+</html>
