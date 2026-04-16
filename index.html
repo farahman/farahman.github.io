@@ -13,53 +13,6 @@
   }
   body { font-family: 'Inter', sans-serif; color: #1f2937; background: var(--white); line-height: 1.6; }
 
-/* NEW NAV */
-	/* Hamburger button — hidden on desktop */
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: white; /* match your nav color */
-}
-
-@media (max-width: 768px) {
-  .nav-toggle {
-    display: block; /* show on mobile */
-  }
-
-  .nav-links {
-    display: none;         /* hidden by default */
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .nav-links.open {
-    display: flex;         /* shown when toggled */
-  }
-
-  .nav-links li {
-    text-align: center;
-    padding: 10px 0;
-    border-top: 1px solid rgba(255,255,255,0.2);
-  }
-}
-	
-
-@media (max-width: 768px) {
-  nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    padding: 8px;
-  }
-
-  nav ul li a {
-    font-size: 0.85rem;
-    padding: 6px 10px;
-  }
-}
 	
 /* NAV */
   nav {
@@ -225,7 +178,7 @@
 
 <!-- NAV -->
 <nav>
-  <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+<span class="nav-brand">Farzana Rahman</span>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <!--<li><a href="#exp-edu">Experience</a></li>-->
