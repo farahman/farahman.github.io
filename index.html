@@ -204,6 +204,47 @@
     .badges { justify-content: center; }
   }
 
+/*for wrapping menu*/
+
+@media (max-width: 768px) {
+
+  /* 1. Let the nav grow naturally in height */
+  nav {
+    position: relative;   /* or 'sticky' — NOT fixed/absolute */
+    height: auto;
+    flex-wrap: wrap;
+  }
+
+  /* 2. Make the list wrap */
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 6px 0;
+    margin: 0;
+    gap: 4px;
+  }
+
+  nav ul li a {
+    font-size: 0.78rem;
+    padding: 5px 8px;
+    display: block;
+  }
+
+  /* 3. Remove any top margin/padding on the first section 
+        that assumes a fixed-height nav */
+  body {
+    padding-top: 0;
+  }
+
+  /* If your main content has a hardcoded top offset, reset it */
+  main, .main, #main, section:first-of-type, .hero, header + * {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
+
+	
 	
 </style>
 </head>
@@ -746,17 +787,6 @@
   &copy; 2026 Farzana Rahman · Syracuse University · Department of EECS
 </footer>
 
-	const toggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-
-toggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-});
-
-// Auto-close menu when a link is clicked
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => navLinks.classList.remove('open'));
-});
 
 </body>
 
