@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- saved from url=(0027)https://farahman.github.io/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Farzana Rahman</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="./index_files/css2" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -13,30 +13,37 @@
   }
   body { font-family: 'Inter', sans-serif; color: #1f2937; background: var(--white); line-height: 1.6; }
 
-/* NEW NAV */
-/* Hamburger button — hidden on desktop */
+/* HAMBURGER NAV */
 .nav-toggle {
   display: none;
   background: none;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: white; /* match your nav color */
+  color: white;
+  padding: 0.25rem 0.5rem;
 }
 
 @media (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 0.5rem 1rem;
+  }
+
   .nav-toggle {
-    display: block; /* show on mobile */
+    display: block;
   }
 
   .nav-links {
-    display: none;         /* hidden by default */
+    display: none !important;
     flex-direction: column;
     width: 100%;
+    margin-top: 0.25rem;
   }
 
   .nav-links.open {
-    display: flex;         /* shown when toggled */
+    display: flex !important;
   }
 
   .nav-links li {
@@ -44,8 +51,11 @@
     padding: 10px 0;
     border-top: 1px solid rgba(255,255,255,0.2);
   }
+
+  .nav-links li:last-child {
+    padding-bottom: 6px;
+  }
 }
-/* Ending of wrap-menu style */
 	
 /* NAV */
   nav {
@@ -204,45 +214,7 @@
     .badges { justify-content: center; }
   }
 
-/*for wrapping menu*/
 
-@media (max-width: 768px) {
-
-  /* 1. Let the nav grow naturally in height */
-  nav {
-    position: relative;   /* or 'sticky' — NOT fixed/absolute */
-    height: auto;
-    flex-wrap: wrap;
-  }
-
-  /* 2. Make the list wrap */
-  nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 6px 0;
-    margin: 0;
-    gap: 4px;
-  }
-
-  nav ul li a {
-    font-size: 0.78rem;
-    padding: 5px 8px;
-    display: block;
-  }
-
-  /* 3. Remove any top margin/padding on the first section 
-        that assumes a fixed-height nav */
-  body {
-    padding-top: 0;
-  }
-
-  /* If your main content has a hardcoded top offset, reset it */
-  main, .main, #main, section:first-of-type, .hero, header + * {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-}
 
 	
 	
@@ -254,16 +226,16 @@
 
 <!-- NAV -->
 <nav>
-  <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+  <button class="nav-toggle" aria-label="Toggle menu">☰</button>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#exp-edu">Experience</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#impact">Impact</a></li>  
-	<li><a href="#awards">Awards</a></li>
-    <li><a href="#teaching">Teaching</a></li>
-    <li><a href="#service">Service</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://farahman.github.io/#about">About</a></li>
+    <li><a href="https://farahman.github.io/#exp-edu">Experience</a></li>
+    <li><a href="https://farahman.github.io/#research">Research</a></li>
+    <li><a href="https://farahman.github.io/#impact">Impact</a></li>  
+	<li><a href="https://farahman.github.io/#awards">Awards</a></li>
+    <li><a href="https://farahman.github.io/#teaching">Teaching</a></li>
+    <li><a href="https://farahman.github.io/#service">Service</a></li>
+    <li><a href="https://farahman.github.io/#contact">Contact</a></li>
   </ul>
 </nav>
 	
@@ -272,7 +244,7 @@
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-avatar">
-      <img src="https://farahman.github.io/img/profile.jpg" alt="Farzana Rahman" onerror="this.parentElement.innerHTML='FR'"/>
+      <img src="./index_files/profile.jpg" alt="Farzana Rahman" onerror="this.parentElement.innerHTML=&#39;FR&#39;">
     </div>
     <div class="hero-text">
       <h1>Farzana Rahman</h1>
@@ -294,7 +266,7 @@
   </div>
 </div>
 
-<!!-- NEWS -->
+<!--!-- NEWS ---->
 <section id="news">
   <div class="section-inner">
     <h2>News</h2>
@@ -475,7 +447,7 @@
 		
 	   <div class="hcard">
         <h4>Inclusion Triangle <span style="font-weight:400;color:var(--gray)">· Google</span></h4>
-        <p>Cultivating Next Generation Computing Researchers through Teaching, Mentoring, and Undergraduate Research. <a  href="https://farahman.github.io/itriangle.html" target="_blank">Site →</a></p>
+        <p>Cultivating Next Generation Computing Researchers through Teaching, Mentoring, and Undergraduate Research. <a href="https://farahman.github.io/itriangle.html" target="_blank">Site →</a></p>
       </div>
 		
 	 <div class="hcard">
@@ -516,7 +488,7 @@
 	  <li>Rahman, F. (2020). <strong>Understanding Barriers and Motivations of Non-Traditional Students Learning Programming in an Online CS1 Course.</strong> ACM SIGITE '20.</li>
       
     </ul>
-    <p style="margin-top:.9rem; font-size:.87rem; color:var(--gray);">Access the full list on <a href="http://dblp.uni-trier.de/pers/hd/r/Rahman:Farzana" target="_blank" style="color:var(--accent);">DBLP →</a> and <a href="https://scholar.google.com/citations?user=178VrZ0AAAAJ&hl=en" target="_blank" style="color:var(--accent);">Google Scholar →</a></p>
+    <p style="margin-top:.9rem; font-size:.87rem; color:var(--gray);">Access the full list on <a href="http://dblp.uni-trier.de/pers/hd/r/Rahman:Farzana" target="_blank" style="color:var(--accent);">DBLP →</a> and <a href="https://scholar.google.com/citations?user=178VrZ0AAAAJ&amp;hl=en" target="_blank" style="color:var(--accent);">Google Scholar →</a></p>
   </div>
 </section>
 	
@@ -777,17 +749,25 @@
       <div class="contact-links">
 	  <a href="https://www.linkedin.com/in/farzana-rahman-phd-syr/" target="_blank">LinkedIn</a>	  
       <a href="http://dblp.uni-trier.de/pers/hd/r/Rahman:Farzana" target="_blank">DBLP</a>
-	  <a href="https://scholar.google.com/citations?user=178VrZ0AAAAJ&hl=en" target="_blank">Google Scholar</a>
+	  <a href="https://scholar.google.com/citations?user=178VrZ0AAAAJ&amp;hl=en" target="_blank">Google Scholar</a>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  &copy; 2026 Farzana Rahman · Syracuse University · Department of EECS
+  © 2026 Farzana Rahman · Syracuse University · Department of EECS
 </footer>
 
-
-</body>
-
-</html>
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  toggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  // Auto-close menu when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+</script>
+</body></html>
